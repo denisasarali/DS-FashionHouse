@@ -1,0 +1,120 @@
+﻿@using CasadeModa.Models
+@model List<Cos>
+@{ ViewBag.Title = "Cos";
+                Layout = "~/Views/Shared/_LayoutPublicPage.cshtml"; }
+
+<script>var obj = document.querySelector(".navlist li:nth-child(1)");
+    obj.classList.remove("active");</script>
+<!-- antet -->
+<section class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__text">
+                    <h4>Cos de cumparaturi</h4>
+                    <div class="breadcrumb__links">
+                        <a href="~/Home/Index">Acasa</a>
+                        <a href="./cumparaturi.html">Cumparaturi</a>
+                        <span>Cos de cumparaturi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- sf -->
+<!-- cos cumparaturi -->
+<section class="shopping-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                @using (Html.BeginForm("ActualizatiCos", "CosCumparaturi", FormMethod.Post))
+                {
+    <div class="shopping__cart__table">
+        <table>
+            <thead>
+                <tr>
+                    <th> Produs </th>
+                    <th> Denumire </th>
+                    <th> Marime </th>
+                    <th> Culoare </th>
+                    <th> Cantitate </th>
+                    <th> Total </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var i in Model)
+                {
+                <tr>
+                    <td class="product__cart__item">
+                        <div class="product__cart__item__pic">
+                            <img src=@Url.Content(""+i.ImagineArticol) width="20%">
+                        </div>
+                        @*<div class="product__cart__item__text">
+                <a href="@Url.Action("DetaliiProdus","Cumparaturi",new { id = i.IdArticol})"><h6>@i.NumeArticol</h6></a>
+                <h5>@String.Format("{0:0,0}", i.PretArticol)</h5>
+            </div>*@
+
+                    </td>
+                    <td class="product__cart__item">
+                        <div class="product__cart__item__text">
+                        <a href="@Url.Action("DetaliiProdus","Cumparaturi",new { id = i.IdArticol})"><h6>@i.NumeArticol</h6></a> 
+                        </div>
+                    </td>
+                    <td class="product__cart__item">
+                        <div class="product__cart__item__text">@i.DenumireMarime  </div>
+                    </td>
+                    <td class="product__cart__item">
+                        <div class="product__cart__item__text">@i.DenumireCuloare  </div>
+                    </td>
+                   
+
+                    <td class="quantity__item">
+                        <div class="quantity">
+                            <div class="pro-qty-2">
+                                <input type="text" name="cantitate" value="@i.Cantitate">
+                            </div>
+                        </div>
+                    </td>
+
+                    <td class="cart__price"> @String.Format("{0:0,0}", i.PretTotal)</td>
+                    <td class="cart__close"><a href="@Url.Action("StergeCos","CosCumparaturi", new { id = i.IdArticol})"><i class="fa fa-close"></i></a></td>
+                </tr>}
+            </tbody>
+        </table>
+    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="continue__btn">
+                                <a href="~/Cumparaturi/ListaProduse">Continua cumparaturile</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="continue__btn update__btn">
+                                <button type="submit"><i class="fa fa-spinner"></i> Actualizati cos</button>
+                            </div>
+                        </div>
+                    </div>}
+
+            </div>
+
+            <div class="col-lg-4">
+               
+                <div class="cart__total">
+                    <h6>Total de plata</h6>
+                    <ul>
+                        <li>Total <span> @String.Format("{0:0,0}", ViewBag.pretTotal)</span></li>
+                    </ul>
+                    @if (Session["info"] != null)
+                    {
+        <a href="@Url.Action("Verificare","CosCumparaturi")" class="primary-btn">Finalizeaza comanda</a> }
+    else
+    {
+<a href="@Url.Action("VerificareFaraCont","CosCumparaturi")" class="primary-btn">Finalizeaza comanda</a>}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--sf -->

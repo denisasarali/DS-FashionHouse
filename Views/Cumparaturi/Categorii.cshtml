@@ -1,0 +1,6 @@
+﻿@using CasadeModa.Models
+@model List<Categorie>
+
+@foreach (var i in Model)
+{
+<li>@Html.ActionLink(i.NumeCategorie, "ListaProduse", "Cumparaturi", new { categorii = i.IdCategorie }, null)</li>}

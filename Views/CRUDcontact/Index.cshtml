@@ -1,0 +1,196 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-7 align-self-center">
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Administrare contacte</h4>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb m-0 p-0">
+                        <li class="breadcrumb-item"><a href="~/Dashboard/Index">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Lista contacte</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="col-5 align-self-center">
+            
+        </div>
+    </div>
+</div>
+<br />
+
+<div class="card-body">
+    <h3 class="text-dark text-uppercase card-title">Contact</h3>
+    <hr />
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+           
+        </div>
+        <div class="col-sm-12 col-md-6">
+            @*<div id="zero_config_filter" class="dataTables_filter" style="text-align: right;">
+                    <label style="display: flex; align-items: center;justify-content: flex-end;">Search: <input type="search" class="form-control form-control-sm" aria-controls="zero_config" style="width:auto" /></label>
+                </div>*@
+
+        </div>
+    </div>
+    <div class="table-responsive">
+
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col" class="text-center">Nr.Crt</th>
+                    <th class="text-center">Nume</th>
+                    <th class="text-center">Email</th>
+                    <th class="text-center" width="400px">Mesaj</th>
+                    <th class="text-center" width="200px">Actiuni</th>
+                </tr>
+            </thead>
+            <tbody id="tblDsContact"></tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="modalLop">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background: #5f76e8; color: white;">
+                <h5 class="modal-title">Trimite email </h5>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Nume</label>
+                    <input type="text" class="form-control" id="nume">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" class="form-control" id="email">
+                </div>
+                @*<div class="form-group">
+                    <label>Raspuns</label>
+                    <input type="text" class="form-control" id="subiect">
+                </div>*@
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnSubmit">Trimite email</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Inchide</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        //---------------------------------
+        $(document).ready(function () {
+            LoadDsContact();
+        });
+        $(document).on('click', "button[name= 'raspuns']", function () {
+            let idContact = $(this).closest('tr').attr('id');
+            $.ajax({
+                url: '/CRUDcontact/Raspuns',
+                type: 'get',
+                data: {
+                    id: idContact
+                },
+                success: function (data) {
+                    if (data.code == 200) {
+                        $('#nume').val(data.detail.nume);
+                        $('#email').val(data.detail.email);
+                        // Không cho chỉnh sửa giá trị
+                        $('#nume').prop('readonly', true);
+                        $('#email').prop('readonly', true);
+                        // Ẩn nút submit
+                        $('#modalLop').modal();
+                    }
+                    else {
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+        // Sự kiện click của button Delete
+        $(document).on('click', "button[name= 'sterge']", function () {
+            let idContact = $(this).closest('tr').attr('id');
+            if (confirm("Are you sure you want to delete this?!")) {
+                $.ajax({
+                    url: '/CRUDcontact/Sterge',
+                    type: 'post',
+                    data: {
+                        id: idContact
+                    },
+                    success: function (data) {
+                        if (data.code == 200) {
+                            alert(data.msg);
+                            LoadDsContact();
+                        }
+                        else {
+                            alert(data.msg);
+                        }
+                    }
+                });
+            }
+        });
+        $('#btnSubmit').click(function () {
+            let subiect = $('#subiect').val();
+            // Ràng buộc dữ liệu
+            if (subiect.length == 0) {
+                alert('Invalid value');
+                return;
+            }
+            let email = $('#email').val().trim();
+            let nume = $('#nume').val().trim();
+            $.ajax({
+                url: '/CRUDcontact/TrimiteEmailCatreUtilizator',
+                type: 'post',
+                data: {
+                    nume: nume,
+                    email: email,
+                    subiect: subiect
+                },
+                success: function (data) {
+                    if (data == true) {
+                        alert("Successfully sent");
+                        $('#modalLop').modal('hide');
+                    }
+                    else {
+                        alert("trimitere esuata");
+                    }
+                }
+            })
+        })
+
+
+        function LoadDsContact() {
+            $.ajax({
+                url: '/CRUDcontact/AfiseazaContact',
+                type: 'get',
+                success: function (data) {
+                    if (data.code == 200) {
+                        $('#tblDsContact').empty();
+                        var stt = 1;
+                        $.each(data.afContact, function (k, v) {
+                            let tr = '<tr id = "' + v.id + '">'
+                            tr += '<td class="text-center">' + stt + '</td>';
+                            tr += '<td class="text-center">' + v.nume + '</td>';
+                            tr += '<td class="text-center">' + v.email + '</td>';
+                            tr += '<td class="text-center">' + v.mesaj + '</td>';
+                            tr += '<td class="text-center">';
+                            /*tr += '<button class="btn waves-effect waves-light btn-primary" name ="raspuns">Raspuns</button> &nbsp;';*/
+                            tr += '<button class="btn waves-effect waves-light btn-danger" name ="sterge">Sterge</button>';
+                            tr += '</td>';
+                            tr += '</tr > ';
+                            $('#tblDsContact').append(tr);
+                            stt++;
+                        });
+                    }
+                }
+            });
+        }
+    </script>
+}

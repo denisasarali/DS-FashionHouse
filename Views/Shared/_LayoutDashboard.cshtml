@@ -1,0 +1,466 @@
+﻿@using System.Web.Optimization;
+@using CasadeModa.Models
+@{
+    Membru user = (Membru)Session["infoAdmin"];
+}
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" ( sizes="16x16" href="~/Content/Admin/assets/images/logo2.png" )>
+    <title>Admin</title>
+
+    <link href="~/Content/Admin/assets/extra-libs/c3/c3.min.css" rel="stylesheet">
+    <link href="~/Content/Admin/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link href="~/Content/Admin/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+    <link href="~/Content/Admin/css/style.min.css" rel="stylesheet">
+
+    @Styles.Render("~/bundle/adminCss")
+
+    <script src="~/Content/Admin/js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            height: 300,
+            menubar: false,
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount'
+            ],
+            toolbar: 'undo redo | formatselect | ' +
+                'bold italic backcolor | alignleft aligncenter ' +
+                'alignright alignjustify | bullist numlist outdent indent | ' +
+                'removeformat | help',
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+        });
+    </script>
+</head>
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar" data-navbarbg="skin6">
+            <nav class="navbar top-navbar navbar-expand-md">
+                <div class="navbar-header" data-logobg="skin6">
+                    <!-- This is for the sidebar toggle which is visible on mobile only -->
+                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
+                        <i class="ti-menu ti-close"></i>
+                    </a>
+                    <!-- ============================================================== -->
+                    <!-- Logo -->
+                    <!-- ============================================================== -->
+                    <div class="navbar-brand">
+                        <!-- Logo icon -->
+                        <a href="~/Dashboard/Index">
+                            <b class="logo-icon">
+                                <!-- Dark Logo icon -->
+
+                                <img src="~/Content/Admin/assets/images/logofinal.png" alt="homepage" class="dark-logo" />
+                                <!-- Light Logo icon -->
+                                @*<img src="~/Admin/Content/assets/images/logo2.png"  alt="homepage" class="light-logo" />*@
+                            </b>
+                            <!--End Logo icon -->
+                            <!-- Logo text -->
+                            <!--<span class="logo-text">
+                                <!-- dark Logo text -->
+
+                                <!--<img src="~/Content/Admin/assets/images/Untitled111.png" alt="homepage" class="dark-logo" />-->
+                                <!-- Light Logo text -->
+                                <!--@*<img src="~/Admin/Content/assets/images/logo3.png"  alt="homepage" class="light-logo"  />*@
+                            </span>-->
+                        </a>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav float-left mr-auto ml-3 pl-1">
+
+                    </ul>
+                    <!-- ============================================================== -->
+                    <!-- Right side toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav float-right">
+                        <!-- ============================================================== -->
+                        <!-- Search -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item d-none d-md-block">
+                            <a class="nav-link" href="javascript:void(0)">
+                                <form>
+                                    @*<div class="customize-input">
+                                        <input class="form-control custom-shadow custom-radius border-0 bg-white"
+                                               type="search" placeholder="Cauta" aria-label="Cauta">
+                                        <i class="form-control-icon" data-feather="search"></i>
+                                    </div>*@
+                                </form>
+                            </a>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <span class="ml-2 d-none d-lg-inline-block">
+                                        <span>Bine ai venit,</span> <span class="text-dark">@user.Nume!</span> <i data-feather="chevron-down" class="svg-icon"></i>
+                                    </span>
+                                }
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
+                                
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="@Url.Action("Logout", "Utilizator")">
+                                <i data-feather="power" class="svg-icon mr-2 ml-1"></i>
+                                    Deconectare
+                                    </a>
+                                <div class="dropdown-divider"></div>
+                                <div class="pl-4 p-3">
+                                    <a href="@Url.Action("SchimbaParola", "Home", new { IdMembru = user.IdMembru})" class="btn btn-sm btn-info">
+                                            Schima parola
+                                        </a>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar" data-sidebarbg="skin6">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar" data-sidebarbg="skin6">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li class="sidebar-item">
+                            <a class="sidebar-link sidebar-link" href="~/Dashboard/Index"
+                               aria-expanded="false">
+                                <i data-feather="home" class="feather-icon"></i><span class="hide-menu">Tablou de bord</span>
+                            </a>
+                        </li>
+                        <li class="list-divider"></li>
+                        <li class="nav-small-cap"><span class="hide-menu">Aplicatii</span></li>
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="~/Home/Index" aria-expanded="false" target="_blank">
+                                <i data-feather="shopping-bag" class="feather-icon"></i><span class="hide-menu">
+                                    Inapoi la magazin
+                                </span>
+                            </a>
+                        </li>
+                        @*<li class="sidebar-item">
+                            <a class="sidebar-link sidebar-link" href="~/Dashboard/Chat" aria-expanded="false">
+                                <i data-feather="message-square" class="feather-icon"></i><span class="hide-menu">Chat</span>
+                            </a>
+                        </li>*@
+                        <li class="sidebar-item">
+                            @*<a class="sidebar-link sidebar-link" href="~/Dashboard/TrackingCovid" aria-expanded="false">
+                                <i data-feather="globe" class="feather-icon"></i><span class="hide-menu">Tracking covid</span>
+                            </a>*@
+                        </li>
+
+                        <li class="list-divider"></li>
+                        <li class="nav-small-cap"><span class="hide-menu">Componente</span></li>
+                        @if (user.IdRol == 1) //
+                        {
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                               aria-expanded="false">
+                                <i data-feather="server" class="feather-icon"></i><span class="hide-menu">Categorie</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                                <li class="sidebar-item">
+                                    <a href="~/CRUDcategorie/Index" class="sidebar-link">
+                                        <span class="hide-menu">
+                                            Lista categorii
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                               aria-expanded="false">
+                                <i data-feather="grid" class="feather-icon"></i><span class="hide-menu">Produse</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                                <li class="sidebar-item">
+                                    <a href="~/CRUDproduse/Creeaza" class="sidebar-link">
+                                        <span class="hide-menu">
+                                            Adauga produse
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="~/CRUDproduse/Index" class="sidebar-link">
+                                        <span class="hide-menu">
+                                            Lista produse
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                               aria-expanded="false">
+                                <i data-feather="layout" class="feather-icon"></i><span class="hide-menu">Blog</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                                <li class="sidebar-item">
+                                    <a href="~/CRUDblog/Creeaza" class="sidebar-link">
+                                        <span class="hide-menu">
+                                            Adauga blog
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="~/CRUDblog/Index" class="sidebar-link">
+                                        <span class="hide-menu">
+                                            Lista blog-uri
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                               aria-expanded="false">
+                                <i data-feather="user" class="feather-icon"></i><span class="hide-menu">Membrii</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                                <li class="sidebar-item">
+                                    <a href="~/CRUDmembru/Creeaza" class="sidebar-link">
+                                        <span class="hide-menu">
+                                            Adauga membru
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="~/CRUDmembru/Index" class="sidebar-link">
+                                        <span class="hide-menu">
+                                            Lista membrii
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                               aria-expanded="false">
+                                <i data-feather="users" class="feather-icon"></i><span class="hide-menu">Clienti</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                                <li class="sidebar-item">
+                                    <a href="~/Admin/CRUDclienti/Index" class="sidebar-link">
+                                        <span class="hide-menu">
+                                            Lista clienti
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                               aria-expanded="false">
+                                <i data-feather="message-square" class="feather-icon"></i><span class="hide-menu">Contact</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                                <li class="sidebar-item">
+                                    <a href="~/CRUDcontact/Index" class="sidebar-link">
+                                        <span class="hide-menu">
+                                            Lista contacte
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                                <i data-feather="shopping-cart" class="feather-icon"></i><span class="hide-menu">Comenzi</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                                <li class="sidebar-item">
+                                    <a href="~/CRUDfactura/Index" class="sidebar-link">
+                                        <span class="hide-menu">
+                                            Lista comenzi
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                       
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                                <i data-feather="pie-chart" class="feather-icon"></i><span class="hide-menu">Programari</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                                <li class="sidebar-item">
+                                    <a href="~/CRUDprogramari/Index" class="sidebar-link">
+                                        <span class="hide-menu">
+                                            Lista programari
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        }
+                            else
+                            {
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                       aria-expanded="false">
+                                        <i data-feather="layout" class="feather-icon"></i><span class="hide-menu">Blog</span>
+                                    </a>
+                                    <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                                        <li class="sidebar-item">
+                                            <a href="~/Admin/CRUDblog/Creeaza" class="sidebar-link">
+                                                <span class="hide-menu">
+                                                    Adauga un blog
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a href="~/Admin/CRUDblog/Index" class="sidebar-link">
+                                                <span class="hide-menu">
+                                                    Lista blog-uri
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                       aria-expanded="false">
+                                        <i data-feather="message-square" class="feather-icon"></i><span class="hide-menu">Contact</span>
+                                    </a>
+                                    <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                                        <li class="sidebar-item">
+                                            <a href="~/Admin/CRUDcontact/Index" class="sidebar-link">
+                                                <span class="hide-menu">
+                                                    Lista contacte
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                       aria-expanded="false">
+                                        <i data-feather="shopping-cart" class="feather-icon"></i><span class="hide-menu">Comenzi</span>
+                                    </a>
+                                    <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                                        <li class="sidebar-item">
+                                            <a href="~/Admin/CRUDfactura/Index" class="sidebar-link">
+                                                <span class="hide-menu">
+                                                    Lista comenzi
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                                        <i data-feather="pie-chart" class="feather-icon"></i><span class="hide-menu">Programari</span>
+                                    </a>
+                                    <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                                        <li class="sidebar-item">
+                                            <a href="~/Admin/CRUDprogramari/Index" class="sidebar-link">
+                                                <span class="hide-menu">
+                                                    Lista programari
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
+                        <li class="list-divider"></li>
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            @RenderBody()
+            
+        </div>
+       
+    </div>
+    
+    <!-- All Jquery -->
+    <script src="~/Content/Admin/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="~/Content/Admin/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="~/Content/Admin/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/Content/Admin/js/app-style-switcher.js"></script>
+    <script src="~/Content/Admin/js/feather.min.js"></script>
+    <script src="~/Content/Admin/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="~/Content/Admin/js/sidebarmenu.js"></script>
+    <script src="~/Content/Admin/js/custom.min.js"></script>
+    <script src="~/Content/Admin/assets/extra-libs/c3/d3.min.js"></script>
+    <script src="~/Content/Admin/assets/extra-libs/c3/c3.min.js"></script>
+    <script src="~/Content/Admin/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="~/Content/Admin/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="~/Content/Admin/js/pages/dashboards/dashboard1.min.js"></script>
+    <script src="~/Content/Admin/assets/extra-libs/sparkline/sparkline.js"></script>
+
+    @*@Scripts.Render("~/bundle/adminJs")*@
+
+    @RenderSection("ChartDashboard", required: false)
+    @RenderSection("ChartCovid", required: false)
+    @RenderSection("Chat", required: false)
+    @RenderSection("scripts", required: false)
+    <script>
+        //session end
+        var sessionTimeoutWarning = @Session.Timeout- 1;
+        var sTimeout = parseInt(sessionTimeoutWarning) * 60 * 1000;
+        setTimeout('SessionEnd()', sTimeout);
+        function SessionEnd() {
+            window.location = "/Utilizator/Logout";
+        }
+    </script>
+</body>
+
+</html>

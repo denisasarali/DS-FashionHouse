@@ -1,0 +1,160 @@
+﻿
+@{ ViewBag.Title = "Creeaza";
+                Layout = "~/Views/Shared/_LayoutDashboard.cshtml"; }
+
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-7 align-self-center">
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Membru</h4>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb m-0 p-0">
+                        <li class="breadcrumb-item"><a href="~/Admin/DashBoard/Index" class="text-muted">Acasa</a></li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Adauga membru</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="col-5 align-self-center">
+            
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Adauga membru</h3>
+                    @if (TempData["msgCreatefailed"] != null)
+                    {
+        <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Inchide">
+                <span aria-hidden="true">×</span>
+            </button>
+            @TempData["msgCreatefailed"]
+        </div>}
+                    @using (Html.BeginForm("Creeaza", "CRUDmembru", FormMethod.Post, new { @id = "form-1", @enctype = "multipart/form-data" }))
+                    {
+        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                        <div class="form-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="username">Username</label>
+                                                        <input type="text" class="form-control" name="username" id="username" />
+                                                        <span class="form-message"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="password">Parola</label>
+                                                        <input type="password" class="form-control" name="parola" id="parola" />
+                                                        <span class="form-message"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="firstName">Prenume</label>
+                                                        <input type="text" class="form-control" name="prenume" id="prenume" />
+                                                        <span class="form-message"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="lastName">Nume</label>
+                                                        <input type="text" class="form-control" name="nume" id="nume" />
+                                                        <span class="form-message"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="address">Adresa</label>
+                                                        <input type="text" class="form-control" name="adresa" id="adresa" />
+                                                        <span class="form-message"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="email">Email</label>
+                                                        <input type="email" class="form-control" name="email" id="email" />
+                                                        <span class="form-message"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="phone">Telefon</label>
+                                                        <input type="number" class="form-control" name="telefon" id="telefon" />
+                                                        <span class="form-message"></span>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="birthday">Data Nasterii</label>
+                                                        <input type="date" class="form-control" name="dataNasterii" id="dataNasterii" />
+                                                        <span class="form-message"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="">Rol</label>
+                                                        @Html.DropDownList("IdRol", null, htmlAttributes: new { @class = "form-control" })
+                                                        <span class="form-message"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                               
+                                            </div>
+                                        </div>
+                                                        <div class="form-actions">
+                                                            <div class="text-right">
+                                                                <button type="submit" class="btn btn-info">Salvare</button>
+                                                                <button type="reset" class="btn btn-dark">Resetare</button>
+                                                            </div>
+                                                        </div>}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Content/js/validator.js"></script>
+<script>Validator({
+        form: '#form-1',
+        formGroupSelector: '.form-group',
+        errorSelector: '.form-message',
+        rules: [
+            Validator.isRequired('#username'),
+            Validator.isRequired('#parola'),
+            Validator.isRequired('#prenume'),
+            Validator.isRequired('#nume'),
+            Validator.isRequired('#email'),
+            Validator.isEmail('#email'),
+            Validator.isRequired('#dataNasterii'),
+            Validator.isRequired('#telefon'),
+            Validator.isRequired('#adresa'),
+
+        ],
+    });
+
+    function showPreview(event) {
+        if (event.target.files.length > 0) {
+            var src = URL.createObjectURL(event.target.files[0]);
+            var preview = document.getElementById("file-ip-1-preview");
+            preview.src = src;
+            preview.style.display = "block";
+            preview.style.height = "200px";
+        }
+    }</script>
+

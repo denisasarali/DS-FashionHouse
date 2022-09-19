@@ -1,0 +1,261 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<h2>Index</h2>
+
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-7 align-self-center">
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Administrare categorii de produse</h4>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb m-0 p-0">
+                        @*<li class="breadcrumb-item"><a href="~/Admin/Dashboard/Index">Dashboard</a></li>*@
+                        <li class="breadcrumb-item active">Lista categorii de produse</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="col-5 align-self-center">
+           
+        </div>
+    </div>
+</div>
+<br />
+
+<div class="card-body">
+    <h3 class="text-dark text-uppercase card-title">Categorie</h3>
+    <button class="btn waves-effect waves-light btn-success" id="btnAdd">Adauga Categorie</button>
+    <hr />
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            @*<div class="dataTables_length" id="zero_config_length" style="display:flex"><label style="display:inherit;">Afiseaza <select name="zero_config_length" aria-controls="zero_config" class="form-control form-control-sm" style="position: relative; bottom: 3px;"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div>*@
+
+        </div>
+        <div class="col-sm-12 col-md-6">
+            @*<div id="zero_config_filter" class="dataTables_filter" style="text-align: right;">
+                    <label style="display: flex; align-items: center;justify-content: flex-end;">Cauta: <input type="search" class="form-control form-control-sm" aria-controls="zero_config" style="width:auto" /></label>
+                </div>*@
+        </div>
+    </div>
+    <div class="table-responsive">
+
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col" class="text-center">ID</th>
+                    <th class="text-center">Nume Categorie</th>
+                    <th class="text-center" width="300px">Actiuni</th>
+                </tr>
+            </thead>
+            <tbody id="tblDsCategorie"></tbody>
+        </table>
+    </div>
+
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" id="modalLop">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background: #5f76e8; color: white;">
+                <h5 class="modal-title">Categorie noua</h5>
+            </div>
+            <div class="modal-body">
+                <input type="text" hidden id="idCategorie" value="" />
+                <div class="form-group">
+                    <label>Nume Categorie</label>
+                    <input type="text" class="form-control" id="numeCategorie" placeholder="Rochii">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnSubmit">Salveaza</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Inchide</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+$(document).ready(function () {
+            IncarcaAfCategorie();
+        });
+
+        // Faceți clic pe evenimentul butonului Ștergere
+        $(document).on('click', "button[name= 'delete']", function () {
+            let idCategorie = $(this).closest('tr').attr('id');
+            if (confirm("Esti sigur ca vrei sa stergi?!")) {
+                $.ajax({
+                    url: '/CRUDcategorie/Sterge',
+                    type: 'post',
+                    data: {
+                        idCategorie: idCategorie
+                    },
+                    success: function (data) {
+                        if (data.code == 200) {
+                            alert(data.msg);
+                            IncarcaAfCategorie();
+                        }
+                        else {
+                            alert(data.msg);
+                        }
+                    }
+                });
+            }
+        });
+
+
+        // Faceți clic pe evenimentul butonului Editare
+        $(document).on('click', "button[name= 'update']", function () {
+            let idCategorie = $(this).closest('tr').attr('id');
+            $('.modal-title').html('Editeaza');
+            $.ajax({
+                url: '/CRUDcategorie/Detalii',
+                type: 'get',
+                data: {
+                    idCategorie: idCategorie
+                },
+                success: function (data) {
+                    if (data.code == 200) {
+                        $('#numeCategorie').val(data.detalii.numeCategorie);
+
+                        $('#idCategorie ').val(data.detalii.idCategorie);
+
+                        // Editarea valorii nu este permisă
+                        $('#numeCategorie').prop('readonly', false);
+                        // Ascunde butonul de trimitere
+                        $('#btnSubmit').show();
+
+                        $('#modalLop').modal();
+                    }
+                    else {
+                        alert(data.msg);
+                    }
+                }
+            });
+
+        });
+
+        // Detaliu .buton clic eveniment
+        $(document).on('click', "button[name= 'view']", function () {
+            let idCategorie = $(this).closest('tr').attr('id');
+
+            $('.modal-title').html('Detalii');
+            $.ajax({
+                url: '/CRUDcategorie/Detalii',
+                type: 'get',
+                data: {
+                    idCategorie: idCategorie
+                },
+                success: function (data) {
+                    if (data.code == 200) {
+                        $('#numeCategorie').val(data.detalii.numeCategorie);
+
+                        //Editarea valorii nu este permisă
+                        $('#numeCategorie').prop('readonly', true);
+                        //
+                        $('#btnSubmit').hide();
+
+                        $('#modalLop').modal();
+                    }
+                    else {
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+        // adauga nou
+        $('#btnAdd').click(function () {
+            $('#idCategorie').val('');
+            $('#numeCategorie').val('');
+            $('#numeCategorie').prop('readonly', false);
+            $('#modalLop').modal();
+            $('.modal-title').html('Categorie noua');
+        });
+
+        //Confirmati click
+        $('#btnSubmit').click(function () {
+            let numeCategorie = $('#numeCategorie').val().trim();
+
+            //legarea datelor
+            if (numeCategorie.length == 0) {
+                alert('Invalid value');
+                return;
+            }
+
+            let idCategorie = $('#idCategorie').val().trim();
+            if (idCategorie.length == 0) {
+                //utilizati ajax pt adauga noi
+                $.ajax({
+                    url: '/CRUDcategorie/AdaugaCategorie',
+                    type: 'post',
+                    data: {
+                        numeCategorie: numeCategorie
+                    },
+                    success: function (data) {
+                        if (data.code == 200) {
+                            alert(data.msg);
+                            IncarcaAfCategorie();
+                            $('#numeCategorie').val('');
+                        }
+                        else {
+                            alert(data.msg);
+                        }
+                    }
+                });
+            }
+            else {
+                //Actualizați o categorie existentă (folosind ajax)
+                $.ajax({
+                    url: '/CRUDcategorie/Actualizati',
+                    type: 'post',
+                    data: {
+                        idCategorie: idCategorie,
+                        numeCategorie: numeCategorie
+                    },
+                    success: function (data) {
+                        if (data.code == 200) {
+                            alert(data.msg);
+                            $('#modalLop').modal('hide');
+
+                            //Reîncărcați categoria ds
+                            IncarcaAfCategorie();
+                        }
+                        else {
+                            alert(data.msg);
+                        }
+                    }
+                });
+
+            }
+        });
+        function IncarcaAfCategorie() {
+            //Utilizați ajax pentru a încărca lista de membri în controlerul CRUDmember
+            $.ajax({
+                url: '/CRUDcategorie/DsCategorie',
+                type: 'get',
+                success: function (data) {
+                    if (data.code == 200) {
+                        $('#tblDsCategorie').empty();
+                        $.each(data.dsCategorie, function (k, v) {
+                            let tr = '<tr id = "' + v.idCategorie + '">'
+                            tr += '<td class="text-center">' + v.idCategorie + '</td>';
+                            tr += '<td class="text-center">' + v.numeCategorie + '</td>';
+                            tr += '<td class="text-center">';
+                            //tr += '<button class="btn waves-effect waves-light btn-primary" name ="view">Detalii</button> &nbsp;';
+                            //tr += '<button class="btn waves-effect waves-light btn-warning" name ="update">Editeaza</button> &nbsp;';
+                            tr += '<button class="btn waves-effect waves-light btn-danger" name ="delete">Sterge</button>';
+                            tr += '</td>';
+                            tr += '</tr > ';
+                            $('#tblDsCategorie').append(tr);
+                        });
+                    }
+                }
+
+            });
+        }</script>
+}

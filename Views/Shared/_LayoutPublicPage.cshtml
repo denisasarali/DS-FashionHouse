@@ -1,0 +1,281 @@
+﻿@using System.Web.Optimization
+@using CasadeModa.Models
+@{ Membru user = (Membru)Session["info"]; }
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="DS fashion">
+    <meta name="keywords" content="DS fashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DS fashion</title>
+
+    <!--favicon-->
+    <link rel="shortcut icon" type="image/png" href="~/Content/assets/images/ds-logo.png" />
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+    @*Css Styles*@
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/css/style.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/css/404.css">
+    <link rel="stylesheet" href="~/Content/css/formUser.css">
+    @Styles.Render("~/bundle/css")
+    @*<script>(function (w, d) { w.CollectId = "60827f2b34b8b76f099ef81c"; var h = d.head || d.getElementsByTagName("head")[0]; var s = d.createElement("script"); s.setAttribute("type", "text/javascript"); s.async = true; s.setAttribute("src", "https://collectcdn.com/launcher.js"); h.appendChild(s); })(window, document);</script>*@
+   
+    <!-- ChatBot -->
+
+
+
+    <link rel="stylesheet" type="text/css" href="~/Content/css/jquery.convform.css" />
+    <script type="text/javascript" src="~/Content/js/jquery.convform.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/custom.js"></script>
+
+</head>
+
+<body>
+
+
+    <!-- pagina -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- meniu canvas -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="offcanvas__option">
+            <div class="offcanvas__links">
+                <a href="@Url.Action("Login","Utilizator")">Autentificare</a>
+                <a href="#">FAQs</a>
+            </div>
+            <div class="offcanvas__top__hover">
+                <span>Usd <i class="arrow_carrot-down"></i></span>
+
+            </div>
+        </div>
+        <div class="offcanvas__nav__option">
+            <a href="#" class="search-switch"><img src="~/Content/img/icon/search.png" alt=""></a>
+            @*<a href="#"><img src="~/Content/img/icon/heart.png" alt=""></a>*@
+            <a href="~/Cart/Cart"><img src="~/Content/img/icon/cart.png" alt=""> <span>0</span></a>
+            <div class="price">0.00</div>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+        <div class="offcanvas__text">
+
+        </div>
+    </div>
+    <!-- Offcanvas sfarsit -->
+    <!--<!-- ChatBot -->
+    <!--<div class="chat_icon">
+        <i class="fa fa-comments" aria-hidden="true"></i>
+    </div>
+    <div class="chat_box">
+        <div class="my-conv-form-wrapper">
+            <form action="" method="GET" class="hidden">
+
+                <select data-conv-question="Hello! How can I help you" name="category">
+                    <option value="WebDevelopment">Website Development ?</option>
+                    <option value="DigitalMarketing">Digital Marketing ?</option>
+                </select>
+
+                <div data-conv-fork="category">
+                    <div data-conv-case="WebDevelopment">
+                        <input type="text" name="domainName" data-conv-question="Please, tell me your domain name">
+                    </div>
+                    <div data-conv-case="DigitalMarketing" data-conv-fork="first-question2">
+                        <input type="text" name="companyName" data-conv-question="Please, enter your company name">
+                    </div>
+                </div>
+
+                <input type="text" name="name" data-conv-question="Please, Enter your name">
+
+                <input type="text" data-conv-question="Hi {name}, <br> It's a pleasure to meet you." data-no-answer="true">-->
+                @*<input data-conv-question="Enter your e-mail" data-pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" type="email" name="email" required placeholder="What's your e-mail?">*@
+
+                @*<select data-conv-question="Please Conform">
+                    <option value="Yes">Conform</option>
+                </select>
+
+            </form>
+        </div>
+    </div>-->*@
+    <!-- ChatBot end -->
+    <!-- incepe sectiune antet -->
+    <header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-7">
+                        <div class="header__top__left">
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-5">
+                        <div class="header__top__right">
+                            @if (Session["info"] != null)
+                            {
+
+                                <div class="header__top__hover">
+
+                                    <span>@user.username <i class="arrow_carrot-down"></i></span>
+                                    <ul>
+                                        @*<li><a href="@Url.Action("EditeazaProfil", "Home", new { userName = user.username })">Edit profie</a></li>*@
+                                        <li><a href="@Url.Action("SchimbaParola", "Home", new { idmembru = user.IdMembru })">Schimba parola</a></li>
+                                        <li><a href="@Url.Action("ComandaMea", "Home", new { idmembru = user.IdMembru })">Comanda mea</a></li>
+                                        <li>@Html.ActionLink("Logout", "Logout", "Utilizator")</li>
+                                    </ul>
+                                </div> }
+                            else
+                            {
+                                <div class="header__top__links">
+                                    <a href="~/Utilizator/Login">Contul meu</a>
+                                </div>}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__logo">
+                        <a href="~/Home/Index">
+                            <img src="~/Content/Admin/assets/images/logofinal.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <nav class="header__menu mobile-menu">
+                        <ul class="navlist">
+                            <li class="active"><a href="~/Home/Index">Acasa</a></li>
+                            <li><a href="~/Cumparaturi/ListaProduse">Nou</a></li>
+                            <li><a href="~/Articol/ListaArticole">Blog</a></li>
+                            @if (Session["info"] != null)
+                            {
+                                <li><a href="~/Programari/Programare">Fa o programare</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="~/Programari/ProgramareFaraCont">Fa o programare</a></li>
+                            }
+                            <li><a href="~/Home/Contact">Contact</a></li>
+                            <li>
+                                <a href="#">Mai mult+</a>
+                                <ul class="dropdown">
+                                    @Html.Action("Categorii", "Cumparaturi")
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                @Html.Action("BaraNavigare", "CosCumparaturi")
+
+            </div>
+            <div class="canvas__open"><i class="fa fa-bars"></i></div>
+        </div>
+    </header>
+    <!-- antet sf -->
+
+
+    @RenderBody()
+
+    <!-- subsol -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer__about">
+                        <div class="footer__logo">
+                            @*<a href="#"><img src="~/Content/img/footer-logo.png" alt=""></a>*@
+                        </div>
+                        <p></p>
+                        <a href="#"><img src="~/Content/img/payment.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
+                    <div class="footer__widget">
+                        <h6>Informatii</h6>
+                        <ul>
+                            <li><a href="#">Magazin</a></li>
+                            <li><a href="#">Termeni si conditii</a></li>
+                            <li><a href="#">Informatii livrare</a></li>
+                            <li><a href="#">Comenzi</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="footer__widget">
+                        <h6>Informatii</h6>
+                        <ul>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Metode de plata</a></li>
+                            <li><a href="#">Livrare</a></li>
+                            <li><a href="#">Retur</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
+                    <div class="footer__widget">
+                        <h6>Contact</h6>
+                        <div class="footer__newslatter">
+                            <p></p>
+                            <form action="#">
+                                <input type="text" placeholder="Email:">
+                                <button type="submit"><span class="icon_mail_alt"></span></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+            </div>
+        </div>
+
+    </footer>
+    <!-- subsol sfarsit -->
+    <!-- cautare -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Cauta...">
+            </form>
+        </div>
+    </div>
+    <!-- cauta sf -->
+    <!-- Js Pluginuri -->
+    <script src="~/Content/js/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/Content/js/jquery.nice-select.min.js"></script>
+    <script src="~/Content/js/jquery.nicescroll.min.js"></script>
+    <script src="~/Content/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/js/jquery.countdown.min.js"></script>
+    <script src="~/Content/js/jquery.slicknav.js"></script>
+    <script src="~/Content/js/mixitup.min.js"></script>
+    <script src="~/Content/js/owl.carousel.min.js"></script>
+    <script src="~/Content/js/main.js"></script>
+    @Scripts.Render("~/bundle/js")
+    <script>
+    //sf
+    var sessionTimeoutWarning = @Session.Timeout- 1;
+    var sTimeout = parseInt(sessionTimeoutWarning) * 60 * 1000;
+    setTimeout('SessionEnd()', sTimeout);
+    function SessionEnd() {
+        window.location = "/Utilizator/Logout";
+    }
+    </script>
+</body>
+
+</html>

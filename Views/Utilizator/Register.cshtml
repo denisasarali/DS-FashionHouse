@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutPublicPage.cshtml";
+
+}
+
+@model CasadeModa.Models.Membru
+
+<script>
+    var obj = document.querySelector(".navlist li:nth-child(1)");
+    obj.classList.remove("active");
+</script>
+
+<div class="container">
+    <div class="singinBx">
+
+        @using (Html.BeginForm("Register", "Utilizator", FormMethod.Post, new { @id = "form-1" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <h2>Inregistreaza-te</h2>
+                </div>
+            </div>
+
+            <div class="nameI" style="display:flow-root;justify-content: center">
+
+                <div class="form-group">
+                    <input type="text" class="form-control" name="username" id="username" placeholder="Username" />
+                    @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+                    <span class="form-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" class="form-control" name="Parola" id="parola" placeholder="Parola" />
+                    @Html.ValidationMessageFor(model => model.parola, "", new { @class = "text-danger" })
+                    <span class="form-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" name="confirm" class="form-control" id="confirma_parola" placeholder="Confirm Parola" />
+                    <span class="form-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" name="Nume" id="nume" placeholder="Nume" />
+                    @Html.ValidationMessageFor(model => model.Nume, "", new { @class = "text-danger" })
+                    <span class="form-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" name="Prenume" id="prenume" placeholder="Prenume" />
+                    @Html.ValidationMessageFor(model => model.Prenume, "", new { @class = "text-danger" })
+                    <span class="form-message"></span>
+                </div>
+
+
+
+                <div class="form-group">
+                    <input type="text" class="form-control" name="Email" id="email" placeholder="Email" />
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    <span class="form-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="date" class="form-control" name="DataNasterii" id="dataNasterii" />
+                    @Html.ValidationMessageFor(model => model.DataNasterii, "", new { @class = "text-danger" })
+                    <span class="form-message"></span>
+                </div>
+
+
+
+                <div class="form-group">
+                    <input type="number" class="form-control" name="Telefon" id="telefon" placeholder="Telefon " />
+                    @Html.ValidationMessageFor(model => model.Telefon, "", new { @class = "text-danger" })
+                    <span class="form-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" name="Adresa" id="adresa" placeholder="Adresa" />
+                    @Html.ValidationMessageFor(model => model.Adresa, "", new { @class = "text-danger" })
+                    <span class="form-message"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <button type="submit" class="btn-submitForm">Inregistrare</button>
+                </div>
+
+                <div class="col-md-10">
+                    <p class="signup">Ai deja un cont? <a href="~/Utilizator/Login">Autentifica-te!</a></p>
+                </div>
+
+            </div>
+
+
+
+        }
+    </div>
+</div>
+<script src="~/Content/js/validator.js"></script>
+<script>
+    Validator({
+        form: '#form-1',
+        formGroupSelector: '.form-group',
+        errorSelector: '.form-message',
+        rules: [
+            Validator.isRequired('#username'),
+            Validator.minLength('#parola', 6),
+            Validator.isRequired('#confirma_parola'),
+            Validator.isConfirmed('#confirma_parola', function () {
+                return document.querySelector('#form-1 #parola').value;
+            }, 'Parola trebuie sa corespunda!'),
+            Validator.isRequired('#nume'),
+            Validator.isRequired('#prenume'),
+            Validator.isEmail('#email'),
+            Validator.isRequired('#dataNasterii'),
+            Validator.isRequired('#telefon'),
+            Validator.isRequired('#adresa'),
+            
+        ],
+    });
+</script>

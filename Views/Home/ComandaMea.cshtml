@@ -1,0 +1,85 @@
+﻿@using CasadeModa.Models
+@model List<Factura>
+@{
+    ViewBag.Title = "ComandaMea";
+    Layout = "~/Views/Shared/_LayoutPublicPage.cshtml";
+}
+<link rel="stylesheet" href="~/Content/css/WatchOrders.css">
+@if (Model.Count == 0)
+{
+    <div class="container" style="padding: 50px 0">
+        <div class="text-center">
+            <img src="~/Content/img/Orders/empty_state.png" class="img-fluid" alt="Responsive image" width="30%">
+            <h5 style=" margin-bottom: 19px; color:#3a3434;">Nu exista comenzi inca.</h5>
+            <a href="~/Cumparaturi/ListaProduse" class="btn-shownow">CUMPARA ACUM</a>
+        </div>
+    </div>
+}
+else
+{
+    foreach (var i in Model)
+    {
+        <div class="container px-1 px-md-4 py-5 mx-auto">
+            <div class="card">
+                <div class="row d-flex justify-content-between px-3 top">
+                    <div class="d-flex">
+                        <h5>COMANDA <span class="text-primary font-weight-bold"><a href="@Url.Action("DetaliiFactura", "Home", new { idfactura = i.IdFactura})">#@i.IdFactura</a></span></h5>
+                    </div>
+                    <div class="d-flex flex-column text-sm-right">
+                        <p class="mb-0">Data efectuarii comenzii <span class="font-weight-bold">@i.DataComanda</span></p>
+                        
+                    </div>
+                </div> <!-- Add class 'active' to progress -->
+                <div class="row d-flex justify-content-center">
+                    <div class="col-12">
+                        @if (i.StatusLivrare == true)
+                        {
+                            <ul id="progressbar" class="text-center">
+                                <li class="active step0"></li>
+                                <li class="active step0"></li>
+                                @*<li class="active step0"></li>
+                                <li class="active step0"></li>*@
+                            </ul>
+                        }
+                        else
+                        {
+                            <ul id="progressbar" class="text-center">
+                                <li class="active step0"></li>
+                                <li class="step0"></li>
+                                @*<li class="step0"></li>
+                                <li class="step0"></li>*@
+                            </ul>
+                        }
+                    </div>
+                </div>
+                <div class="row justify-content-between top">
+                    <div class="row d-flex icon-content">
+                        <img class="icon" src="~/Content/img/Orders/process-check.png">
+                        <div class="d-flex flex-column">
+                            <p class="font-weight-bold">Comanda<br>procesata</p>
+                        </div>
+                    </div>
+                    <div class="row d-flex icon-content">
+                        <img class="icon" src="~/Content/img/Orders/process-product.png">
+                        <div class="d-flex flex-column">
+                            <p class="font-weight-bold">Comanda<br>expediata</p>
+                        </div>
+                    </div>
+                    <div class="row d-flex icon-content">
+                        @*<img class="icon" src="~/Content/img/Orders/process-delivery.png">
+                        <div class="d-flex flex-column">
+                            <p class="font-weight-bold"><br>Pe drum</p>
+                        </div>*@
+                    </div>
+                    <div class="row d-flex icon-content">
+                        @*<img class="icon" src="~/Content/img/Orders/process-home.png">
+                        <div class="d-flex flex-column">
+                            <p class="font-weight-bold">Comanda<br>a sosit</p>
+                        </div>*@
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    }
+}

@@ -1,0 +1,146 @@
+﻿@using CasadeModa.Models
+@model List<DetaliiFactura>
+
+@{
+    ViewBag.Title = "DetaliiFactura";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+@{ Factura info = (Factura)@Session["informatii"]; }
+
+<div class="jumbotron jumbotron-fluid">
+    <h1 class="mt-3 theme-color mb-4 text-center">Detalii factura</h1>
+    <p class="lead text-center">
+        Comanda / #@ViewBag.IdFactura
+    </p>
+    <p class="lead text-center">
+        <a class="btn btn-primary btn-lg" href="~/CRUDfactura/Index" role="button">Inapoi la lista comenzilor</a>
+    </p>
+</div>
+<div class="card-body">
+    <h3 class="mb-3 text-dark text-uppercase">Informatii despre destinatar</h3>
+    <hr />
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col" class="text-center">Nume</th>
+                <th scope="col" class="text-center">Email</th>
+                <th scope="col" class="text-center">Telefon</th>
+                <th scope="col" class="text-center">Adresa</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-center">
+                    @if (info.IdClient != null && info.IdMembru == null)
+                    {
+                        @info.Client.Prenume<span> </span>@info.Client.Nume }
+                    else
+                    {
+                        @info.Membru.Prenume<span> </span>@info.Membru.Nume}
+                </td>
+                <td class="text-center">
+                    @if (info.IdClient != null && info.IdMembru == null)
+                    {
+                        @info.Client.Email }
+                    else
+                    {
+                        @info.Membru.Email}
+                </td>
+                <td class="text-center">
+                    @if (info.IdClient != null && info.IdMembru == null)
+                    {
+                        @info.Client.Telefon }
+                    else
+                    {
+                        @info.Membru.Telefon}
+                </td>
+                <td class="text-center">
+                    @if (info.IdClient != null && info.IdMembru == null)
+                    {
+                        @info.Client.Adresa }
+                    else
+                    {
+                        @info.Membru.Adresa}
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <h3 class="mb-3 text-dark text-uppercase">Produse comandate</h3>
+    <hr />
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col" class="text-center">Nr.Crt</th>
+                <th scope="col" class="text-center">Produs</th>
+                <th scope="col" class="text-center">Cantitate</th>
+                <th scope="col" class="text-center">Pret unitate</th>
+                <th scope="col" class="text-center">Marime</th>
+                <th scope="col" class="text-center">Culoare</th>
+                <th scope="col" class="text-center">Total de plata</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ int nr = 1, total = 0, prettotal = 0;}
+            @foreach (var i in Model)
+            {
+                
+            <tr>
+                <th scope="row" class="text-center font-weight-medium" width="80px">@nr</th>
+                <td width="400px">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src=@Url.Content("" + i.Produ.Imagine) width="40%" />
+                        </div>
+                        <div class="col-md-9">
+                            @i.Produ.NumeProdus
+                        </div>
+                    </div>
+                </td>
+                <td class="text-center">@i.CantitateProdus</td>
+                <td class="text-center">@i.PretUnit</td>
+                <td class="text-center">@i.Marime.DenumireMarime</td>
+                <td class="text-center">@i.Culoare.DenumireCuloare</td>
+                @*<td class="text-center">@i.Produs.discount%</td>*@
+                @*<td class="text-center">$@tempPrice</td>*@
+            <td class="text-center">
+                @i.PretTotal
+            </td>
+            </tr>
+                  
+            nr++;
+            total += (int)i.PretTotal;
+
+        }
+            @{ prettotal = total; }
+            </tbody>
+        </table>
+
+    <h3 class="mb-3 text-dark text-uppercase">Plata</h3>
+    <hr />
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col" class="text-center">Total</th>
+                <th scope="col" class="text-center">Transport</th>
+                @*<th scope="col" class="text-center">Total money discounted</th>*@
+                <th scope="col" class="text-center">Total de plata</th>
+                @*<th scope="col" class="text-center">Printeza factura</th>*@
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-center">@prettotal</td>
+                <td class="text-center">0</td>
+                @*<td class="text-center">-$@totaldiscount</td>*@
+                <td class="text-center">@total</td>
+                @*<td class="text-center"><a href="@Url.Action("GenerarePDF", "CRUDfactura")"><u>Printeaza factura</u></a></td>*@
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+

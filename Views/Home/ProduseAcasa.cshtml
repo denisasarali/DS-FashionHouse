@@ -1,0 +1,37 @@
+﻿@using CasadeModa.Models
+@model List<Produ>
+<div class="row product__filter">
+    @foreach (var i in Model)
+    {
+
+<div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
+    <div class="product__item">
+        <div class="product__item__pic set-bg" data-setbg=@Url.Content("" + i.Imagine)>
+
+        </div>
+        <div class="product__item__text">
+            <h6><a href="@Url.Action("DetaliiProdus", "Cumparaturi", new { id = i.IdProdus, Categorie = i.IdCategorie })" class="numeProdus">@i.NumeProdus</a></h6>
+            <a href="@Url.Action("DetaliiProdus", "Cumparaturi", new { id = i.IdProdus, @strURL = Request.Url.ToString() })" class="add-cart">Adauga in cos</a>
+            <h5>
+
+
+                <span class="price">@i.Pret lei</span>
+            </h5>
+            @*<div class="product__color__select">
+                <label for="pc-1">
+                    <input type="radio" id="pc-1">
+                </label>
+                <label class="active black" for="pc-2">
+                    <input type="radio" id="pc-2">
+                </label>
+                <label class="grey" for="pc-3">
+                    <input type="radio" id="pc-3">
+                </label>
+            </div>*@
+        </div>
+    </div>
+</div>
+
+
+ }
+</div>

@@ -1,0 +1,136 @@
+﻿@using CasadeModa.Models
+@using PagedList.Mvc
+@model PagedList.PagedList<Programari>
+@{ ViewBag.Title = "Index";
+                Layout = "~/Views/Shared/_LayoutDashboard.cshtml"; }
+
+
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-7 align-self-center">
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Administrare programari</h4>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb m-0 p-0">
+                        <li class="breadcrumb-item"><a href="~/Dashboard/Index">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Lista programari</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<br />
+
+<div class="card-body">
+    
+   
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <div class="dataTables_length" id="zero_config_length" style="display:flex"><label style="display:inherit;">Afiseaza <select name="zero_config_length" aria-controls="zero_config" class="form-control form-control-sm" style="position: relative; bottom: 3px;"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> intrari</label></div>
+
+        </div>
+        <div class="col-sm-12 col-md-6">
+            @*<div id="zero_config_filter" class="dataTables_filter" style="text-align: right;">
+                    <label style="display: flex; align-items: center;justify-content: flex-end;">Search: <input type="search" class="form-control form-control-sm" aria-controls="zero_config" style="width:auto" /></label>
+                </div>*@
+        </div>
+    </div>
+    <div class="table-responsive">
+
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col" class="text-center">ID programare</th>
+                    <th class="text-center">Client</th>
+                    <th class="text-center">Data </th>
+                    <th class="text-center">Ora</th>
+                    <th class="text-center">Telefon</th>
+                    <th class="text-center">Email</th>
+
+                    @*<th class="text-center" width="250px">Actiuni</th>*@
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var i in Model)
+                {
+                <tr>
+                    <td class="text-center font-weight-medium text-dark px-2 py-4">
+                        <a href="@Url.Action("Index", "CRUDprogramare", new { IdProgramare = i.IdProgramare})">#@i.IdProgramare</a>
+                    </td>
+
+                    <td class="text-muted px-2 py-4 text-center">
+                        @if (i.IdClient != null)
+                        {
+                @Html.DisplayFor(modelItem => i.Client.Prenume)<span> </span>@Html.DisplayFor(modelItem => i.Client.Nume) }
+            else
+            {
+                @Html.DisplayFor(modelItem => i.Membru.Prenume)<span> </span>@Html.DisplayFor(modelItem => i.Membru.Nume)@*<span> </span>@Html.DisplayFor(modelItem => i.Membru.Telefon)*@}
+                    </td>
+                    <td class="text-muted px-2 py-4 font-14 text-center">
+                        @i.Data.ToString("dd-MM-yyyy")
+                    </td>
+                    <td class="text-muted px-2 py-4 font-14 text-center">
+                        @i.Ora.ToString("hh':'mm")
+                    </td>
+                    <td class="text-muted px-2 py-4 text-center">
+                        @if (i.IdClient != null)
+                        {
+                @Html.DisplayFor(modelItem => i.Client.Telefon) }
+            else
+            {
+                @Html.DisplayFor(modelItem => i.Membru.Telefon)}
+                    </td>
+                    <td class="text-muted px-2 py-4 text-center">
+                        @if (i.IdClient != null)
+                        {
+                @Html.DisplayFor(modelItem => i.Client.Email) }
+            else
+            {
+                @Html.DisplayFor(modelItem => i.Membru.Email)}
+                    </td>
+                    <td class="text-muted px-2 py-4 font-14 text-center">
+                        @*@i.Membru.Telefon*@
+                    </td>
+
+
+
+                </tr>}
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row" style=" align-items: center">
+
+        <div class="col-sm-12 col-md-7">
+            <div class="dataTables_paginate paging_simple_numbers" id="default_order_paginate">
+                @Html.PagedListPager(Model, pagina => Url.Action("Index", new { pagina = pagina }), new PagedListRenderOptions() { LiElementClasses = new List<string> { "paginate_button", "page-item" } })
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .page-item a {
+        display: block;
+        padding: .5rem .75rem;
+        margin-left: -1px;
+        line-height: 1.25;
+        color: #5f76e8;
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+    }
+
+    .pagination {
+        margin: 2px 0;
+        white-space: nowrap;
+        justify-content: flex-end;
+    }
+</style>
+
+
+
+

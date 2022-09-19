@@ -1,0 +1,104 @@
+﻿
+@{ ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutDashBoard.cshtml"; }
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-7 align-self-center">
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Clienti</h4>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb m-0 p-0">
+                        <li class="breadcrumb-item"><a href="~/Dashboard/Index">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Lista clienti</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        
+    </div>
+</div>
+<br />
+
+<div class="card-body">
+    <h3 class="text-dark text-uppercase card-title">Clienti</h3>
+
+    <hr />
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <div class="dataTables_length" id="zero_config_length" style="display:flex"><label style="display:inherit;">afiseaza <select name="zero_config_length" aria-controls="zero_config" class="form-control form-control-sm" style="position: relative; bottom: 3px;"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> intrari</label></div>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            @*<div id="zero_config_filter" class="dataTables_filter" style="text-align: right;">
+                    <label style="display: flex; align-items: center;justify-content: flex-end;">Search: <input type="search" class="form-control form-control-sm" aria-controls="zero_config" style="width:auto" /></label>
+                </div>*@
+        </div>
+    </div>
+    <div class="table-responsive">
+
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col" class="text-center">Nr.Crt</th>
+                    <th class="text-center">Nume</th>
+                    <th class="text-center">Email</th>
+                    <th class="text-center">Telefon</th>
+                    <th class="text-center">Adresa</th>
+                   
+                </tr>
+            </thead>
+            <tbody id="tblDsCustomer"></tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .page-item a {
+        display: block;
+        padding: .5rem .75rem;
+        margin-left: -1px;
+        line-height: 1.25;
+        color: #5f76e8;
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+    }
+
+    .pagination {
+        margin: 2px 0;
+        white-space: nowrap;
+        justify-content: flex-end;
+    }
+</style>
+@section scripts{
+    <script>$(document).ready(function () {
+            LoadDsCustomer();
+        });
+      
+        function LoadDsCustomer() {
+            //Dùng ajax để load danh sách member trong controller CRUDmember
+            $.ajax({
+                url: '/Admin/CRUDclienti/AfiseazaClienti',
+                type: 'get',
+                success: function (data) {
+                    if (data.code == 200) {
+                        $('#tblDsCustomer').empty();
+                        let stt = 1;
+                        $.each(data.afClienti, function (k, v) {
+                            let tr = '<tr id = "' + v.IdClient + '">'
+                            tr += '<td class="text-center">' + stt + '</td>';
+                            tr += '<td class="text-center">' + v.Prenume + '<span> </span>' + v.Nume + '</td>';
+                            tr += '<td class="text-center">' + v.Email + '</td>';
+                            tr += '<td class="text-center">' + v.Telefon + '</td>';
+                            tr += '<td class="text-center">' + v.Adresa + '</td>';
+                            tr += '<td class="text-center">';
+                            
+                            tr += '</td>';
+                            tr += '</tr > ';
+                            $('#tblDsCustomer').append(tr);
+                            stt++;
+                        });
+                    }
+                }
+
+            });
+        }</script>
+}

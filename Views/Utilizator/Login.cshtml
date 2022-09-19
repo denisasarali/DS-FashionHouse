@@ -1,0 +1,97 @@
+﻿@*@using CaptchaMvc.HtmlHelpers*@
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutPublicPage.cshtml";
+}
+
+
+<script>
+    var obj = document.querySelector(".navlist li:nth-child(1)");
+    obj.classList.remove("active");
+</script>
+
+
+<div class="container">
+    @if (TempData["msjEsuat"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            @TempData["msgEsuat"]
+        </div>
+    }
+    @if (TempData["msjSucces"] != null)
+    {
+        <div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            @TempData["msjSucces"]
+        </div>
+    }
+    <div class="singinBx">
+
+        @using (Html.BeginForm("Login", "Utilizator", FormMethod.Post, new { @id = "form-1", @enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <h2>Conecteaza-te!</h2>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input id="username" name="username" type="text" placeholder="Username" class="form-control">
+                    <span class="form-message"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input id="parola" name="parola" type="password" placeholder="Parola" class="form-control">
+                    <span class="form-message"></span>
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                <div class="col-md-10">
+                    @Html.Captcha("Try-Another", "Enter the text you see above", 4, "Is required field", true)
+
+                    <span class="form-message"></span>
+                    <p style="color:red">@ViewBag.captcha</p>
+                </div>
+            </div>*@
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <button type="submit" class="btn-submitForm">Autentificare</button>
+                </div>
+            </div>
+
+            <div class="col-md-10">
+                <p class="signup">Nu ai un cont? <a href="~/Utilizator/Register">Inregistreaza-te!</a></p>
+            </div>
+
+        }
+
+    </div>
+</div>
+
+<script src="~/Content/js/validator.js"></script>
+<script>
+    Validator({
+        form: '#form-1',
+        formGroupSelector: '.form-group',
+        errorSelector: '.form-message',
+        rules: [
+            Validator.isRequired('#username'),
+            Validator.isRequired('#parola'),
+            /*Validator.isRequired('#CaptchaInputText'),*/
+        ],
+    });
+</script>
+

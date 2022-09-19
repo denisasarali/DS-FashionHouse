@@ -1,0 +1,89 @@
+﻿
+
+@model CasadeModa.Models.Membru
+@{
+    ViewBag.Title = "SchimbaParola";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body" style="position: relative; left: 266px;">
+                    <h4 class="card-title">Schimare parola</h4>
+                    @using (Html.BeginForm("SchimbaParola", "Dashboard", FormMethod.Post, new { @id = "form-1", @enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-body">
+                    @Html.HiddenFor(model => model.DataInregistrare)
+                    @Html.HiddenFor(model => model.Status)
+                    @Html.HiddenFor(model => model.IdRol)
+                    @Html.HiddenFor(model => model.username)
+                    @Html.HiddenFor(model => model.IdMembru)
+                    @Html.HiddenFor(model => model.Prenume)
+                    @Html.HiddenFor(model => model.Nume)
+                    @Html.HiddenFor(model => model.Email)
+
+                    @Html.HiddenFor(model => model.Telefon)
+                    @Html.HiddenFor(model => model.Adresa)
+                    @Html.HiddenFor(model => model.DataNasterii)
+
+
+
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.IdMembru, new { htmlAttributes = new { @class = "form-control", @id = "idmembru", @type = "hidden" } })
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="username">Parola curenta</label>
+                        <input type="password" class="form-control" id="ParolaCurenta" name="ParolaCurenta" />
+                        <span class="form-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="productName">Parola noua</label>
+                        <input type="password" class="form-control" id="new-password" name="ParolaNoua" />
+                        <span class="form-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="productName">Confirma parola</label>
+                        <input type="password" class="form-control" id="password_confirmation" name="Confirm" />
+                        <span class="form-message"></span>
+                    </div>
+                </div>
+                        <div class="form-actions">
+                            <div class="text-left">
+                                <button type="submit" class="btn btn-info">Salvare</button>
+                                <button type="reset" class="btn btn-dark">Resetare</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .form-group input {
+        width: 50%
+    }
+</style>
+<script src="~/Content/js/validator.js"></script>
+<script>
+    Validator({
+        form: '#form-1',
+        formGroupSelector: '.form-group',
+        errorSelector: '.form-message',
+        rules: [
+            Validator.isRequired('#ParolaCurenta'),
+            Validator.minLength('#new-password', 6),
+            Validator.isConfirmed('#password_confirmation', function () {
+                return document.querySelector('#form-1 #new-password').value;
+            }, 'Parola trebuie sa corespunda!')
+        ],
+    });
+</script>
+

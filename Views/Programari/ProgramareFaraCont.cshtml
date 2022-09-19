@@ -1,0 +1,137 @@
+﻿
+
+@{
+    ViewBag.Title = "ProgramareFaraCont";
+    Layout = "~/Views/Shared/_LayoutPublicPage.cshtml";
+}
+
+<h2>Programare</h2>
+<script>
+    var obj = document.querySelector(".navlist li:nth-child(1)");
+    obj.classList.remove("active");</script>
+<!-- antet -->
+<section class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__text">
+                    <h4>Fa o programare</h4>
+                    <div class="breadcrumb__links">
+                        <a href="~/Home/Index">Acasa</a>
+                        <a href="./programari.html">Programari</a>
+                        <span>Timite programare</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--  -->
+<!-- Checkout  -->
+<section class="checkout spad">
+    <div class="container">
+        <div class="checkout__form">
+            <div class="row">
+                <div class="col-lg-8 col-md-6">
+
+                    <h6 class="checkout__title">
+                        Atentie! Programarile se fac cu 24h inainte!!
+                        Va rugam sa respectati cu exactitate data si ora la care ati facut programarea pentru a evita aglomerarea sau decalarea!
+                    </h6>
+                    @*@{ Programare programare = (Programare)Session["info"]; }*@
+                    @using (Html.BeginForm("ProgramareFaraCont", "Programari", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="checkout__input">
+                                            <p>Data<span>*</span></p>
+                                            <input type="date" name="Data" id="data">
+                                            <span class="form-message"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="checkout__input">
+                                            <p>Ora<span>*</span></p>
+                                            <input type="time" @*required step="3600" min="08:00" max="18:00"*@  name="Ora" id="ora">
+                                            <small>Programul de lucru este 08:00- 18:00!!!</small>
+                                            <span class="form-message"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="checkout__input">
+                                            <p>Nume<span>*</span></p>
+                                            <input type="text" name="Nume" id="nume">
+                                            <span class="form-message"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="checkout__input">
+                                            <p>Prenume<span>*</span></p>
+                                            <input type="text" name="Prenume" id="prenume">
+                                            <span class="form-message"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="checkout__input">
+                                            <p>Email<span>*</span></p>
+                                            <input type="email" name="Email" id="email">
+                                            <span class="form-message"></span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="checkout__input">
+                                            <p>Adresa<span>*</span></p>
+                                            <input type="text" name="Adresa" id="adresa">
+                                            <span class="form-message"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="checkout__input">
+                                            <p>Telefon<span>*</span></p>
+                                            <input type="text" name="Telefon" id="telefon">
+                                            <span class="form-message"></span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="checkout__input">
+                                        <button type="submit" class="site-btn order-button">PROGRAMEAZA-TE</button>
+                                        @*<a href="@Url.Action("PaymentWithPaypal","Cart")" class="paypal-button"><img src="~/Content/img/Orders/paypalicon.svg" /><img src="~/Content/img/Orders/paypalcontent.svg" width="20%" /></a>*@
+                                        <a href="@Url.Action("Index", "Home")" class="submit-button"></a>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="~/Content/js/validator.js"></script>
+<script>
+    Validator({
+        form: '#form-1',
+        formGroupSelector: '.checkout__input',
+        errorSelector: '.form-message',
+        rules: [
+            Validator.isDate('#data'),
+            Validator.isRequired('#ora'),
+            Validator.isRequired('#nume'),
+            Validator.isRequired('#prenume'),
+            Validator.isRequired('#adresa'),
+            Validator.isEmail('#email'),
+            Validator.isRequired('#telefon'),
+        ],
+    });</script>
+

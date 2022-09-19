@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "ListaProduse";
+    Layout = "~/Views/Shared/_LayoutPublicPage.cshtml";
+}
+
+<h2>Rochii disponibile</h2>
+
+<script>var obj = document.querySelector(".navlist li:nth-child(1)");
+    var obj2 = document.querySelector(".navlist li:nth-of-type(2)");
+    obj.classList.remove("active");
+    obj2.classList.add("active");</script>
+
+<!-- antet -->
+<section class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__text">
+                    <h4>Catalog</h4>
+                    <div class="breadcrumb__links">
+                        <a href="~/Home/Index">Acasa</a>
+                        <span>Cumparaturi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- sf-->
+<!-- sectiune cumparaturi -->
+<section class="shop spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="shop__sidebar">
+                    <div class="shop__sidebar__search">
+                        @using (Html.BeginForm("ListaProduse", "Cumparaturi", FormMethod.Get, new { @style = "display: flex; align-items: center;" }))
+                        {
+                            <input type="text" placeholder="Cauta...">
+                            <button type="submit"><span class="icon_search"></span></button>}
+                    </div>
+                    <div class="shop__sidebar__accordion">
+                        <div class="accordion" id="accordionExample">
+                            <div class="card">
+                                <div class="card-heading">
+                                    <a data-toggle="collapse" data-target="#collapseOne">Categorii</a>
+                                </div>
+                                <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="shop__sidebar__categories">
+                                            <ul class="nice-scroll">
+                                                @Html.Action("Categorii", "Cumparaturi")
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="shop__product__option">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                           
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="shop__product__option__right">
+                                <p>Sorteaza dupa pret:</p>
+                                <select>
+                                    <option value="">De la mic la mare</option>
+                                    <option value="">0lei - 55lei</option>
+                                    <option value="">55lei - 100lei</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @Html.Action("ListaArticol", "Cumparaturi")
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Shop Section End -->

@@ -1,0 +1,172 @@
+﻿ 
+@{ ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPublicPage.cshtml"; }
+@if (TempData["msgChangePassword"] != null)
+{
+<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    @TempData["msgChangePassword"]
+</div>}
+@if (TempData["msgChangePasswordFailed"] != null)
+{
+<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+    @TempData["msgChangePasswordFailed"]
+</div>}
+@if (TempData["msgEditProfieFailed"] != null)
+{
+<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+    @TempData["msgEditProfieFailed"]
+</div>}
+@if (TempData["msgDeleteOrder"] != null)
+{
+<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    @TempData["msgDeleteOrder"]
+</div>}
+<!-- inceput carusel -->
+<section class="hero">
+    <div class="hero__slider owl-carousel">
+        <div class="hero__items set-bg" data-setbg=@Url.Content("~/Content/img/carusel1.jpg")>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-5 col-lg-7 col-md-8">
+                        <div class="hero__text">
+                            <h6>Colectia de vara</h6>
+                            <h2>Rochii elegante</h2>
+                            <p>
+                                Rochii speciale pentru evenimentul tau.
+                            </p>
+                            <a href="~/Cumparaturi/ListaProduse" class="primary-btn">Cumpara acum <span class="arrow_right"></span></a>
+                            <div class="hero__social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero__items set-bg" data-setbg=@Url.Content("~/Content/img/carusel2.jpg")>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-5 col-lg-7 col-md-8">
+                        <div class="hero__text">
+                            <h6>Colectia de vara</h6>
+                            <h2>Rochii cu livrare imediata</h2>
+                            <p>
+                              Rochii de calitate, perfecte pentru tine.
+                            </p>
+                            <a href="~/Cumparaturi/ListaProduse" class="primary-btn">Cumpara acum <span class="arrow_right"></span></a>
+                            <div class="hero__social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- carusel sf -->
+<!-- sectiune banner -->
+<section class="banner spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 offset-lg-4">
+                <div class="banner__item">
+                    <div class="banner__item__pic">
+                       
+                        <img src="~/Content/img/colectie.jpg" alt="" />
+                    </div>
+                    <div class="banner__item__text">
+                        <h2>Colectia 2022</h2>
+                        <a href="~/Cumparaturi/ListaProduse">Cumpara acum</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="banner__item banner__item--middle">
+                    <div class="banner__item__pic">
+
+                        <img src="~/Content/img/rnunta.jpg" alt=""/>
+                    </div>
+                    <div class="banner__item__text">
+                        <h2>Rochii de nunta</h2>
+                        <a href="~/Cumparaturi/ListaProduse">Cumpara acum</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="banner__item banner__item--last">
+                    <div class="banner__item__pic">
+
+                        <img src="~/Content/img/rdezi.jpg" />
+                    </div>
+                    <div class="banner__item__text">
+                        <h2>Rochii de zi</h2>
+                        <a href="~/Cumparaturi/ListaProduse">Cumpara acum</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--sfarsit banner -->
+<!-- sectiune produse -->
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="filter__controls">
+                    <li class="active" data-filter="*">Cele mai bune produse</li>
+                    <li data-filter=".new-arrivals">Noi in stoc</li>
+                    <li data-filter=".hot-sales">Reduceri</li>
+                </ul>
+            </div>
+        </div>
+        @Html.Action("ProduseAcasa", "Home")
+    </div>
+</section>
+<!-- sectiune produse sf -->
+<!-- categorii -->
+<section class="categories spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="categories__text">
+                    <h2>Rochii de nunta<br /> <span>Rochii de mireasa</span> <br /> Rochii cu livrare imediata</h2>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="categories__hot__deal">
+                    <img src="~/Content/img/pexels-lucas-mendes-6966591.jpg" />
+                    
+                </div>
+            </div>
+            <div class="col-lg-4 offset-lg-1">
+                
+                <a href="~/Cumparaturi/ListaProduse" class="primary-btn">Cumpara acum</a>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!-- categorii sf -->
+
+
+
