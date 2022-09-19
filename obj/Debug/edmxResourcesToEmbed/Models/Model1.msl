@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBcasademodaModelStoreContainer" CdmEntityContainer="DBcasademodaEntities">
+    <EntitySetMapping Name="Articols">
+      <EntityTypeMapping TypeName="DBcasademodaModel.Articol">
+        <MappingFragment StoreEntitySet="Articol">
+          <ScalarProperty Name="IdArticol" ColumnName="IdArticol" />
+          <ScalarProperty Name="Titlu" ColumnName="Titlu" />
+          <ScalarProperty Name="Descriere" ColumnName="Descriere" />
+          <ScalarProperty Name="Imagine" ColumnName="Imagine" />
+          <ScalarProperty Name="DataPublicare" ColumnName="DataPublicare" />
+          <ScalarProperty Name="Continut" ColumnName="Continut" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IdCategorie" ColumnName="IdCategorie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="DBcasademodaModel.Categorie">
+        <MappingFragment StoreEntitySet="Categorie">
+          <ScalarProperty Name="IdCategorie" ColumnName="IdCategorie" />
+          <ScalarProperty Name="NumeCategorie" ColumnName="NumeCategorie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="DBcasademodaModel.Client">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+          <ScalarProperty Name="Nume" ColumnName="Nume" />
+          <ScalarProperty Name="Prenume" ColumnName="Prenume" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Culoares">
+      <EntityTypeMapping TypeName="DBcasademodaModel.Culoare">
+        <MappingFragment StoreEntitySet="Culoare">
+          <ScalarProperty Name="IdCuloare" ColumnName="IdCuloare" />
+          <ScalarProperty Name="DenumireCuloare" ColumnName="DenumireCuloare" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetaliiFacturas">
+      <EntityTypeMapping TypeName="DBcasademodaModel.DetaliiFactura">
+        <MappingFragment StoreEntitySet="DetaliiFactura">
+          <ScalarProperty Name="IdDF" ColumnName="IdDF" />
+          <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
+          <ScalarProperty Name="IdProdus" ColumnName="IdProdus" />
+          <ScalarProperty Name="CantitateProdus" ColumnName="CantitateProdus" />
+          <ScalarProperty Name="PretUnit" ColumnName="PretUnit" />
+          <ScalarProperty Name="PretTotal" ColumnName="PretTotal" />
+          <ScalarProperty Name="IdCuloare" ColumnName="IdCuloare" />
+          <ScalarProperty Name="IdMarime" ColumnName="IdMarime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Facturas">
+      <EntityTypeMapping TypeName="DBcasademodaModel.Factura">
+        <MappingFragment StoreEntitySet="Factura">
+          <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
+          <ScalarProperty Name="NrFactura" ColumnName="NrFactura" />
+          <ScalarProperty Name="DataComanda" ColumnName="DataComanda" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="StatusLivrare" ColumnName="StatusLivrare" />
+          <ScalarProperty Name="DataLivrare" ColumnName="DataLivrare" />
+          <ScalarProperty Name="CostTotal" ColumnName="CostTotal" />
+          <ScalarProperty Name="IdMembru" ColumnName="IdMembru" />
+          <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Marimes">
+      <EntityTypeMapping TypeName="DBcasademodaModel.Marime">
+        <MappingFragment StoreEntitySet="Marime">
+          <ScalarProperty Name="IdMarime" ColumnName="IdMarime" />
+          <ScalarProperty Name="DenumireMarime" ColumnName="DenumireMarime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Membrus">
+      <EntityTypeMapping TypeName="DBcasademodaModel.Membru">
+        <MappingFragment StoreEntitySet="Membru">
+          <ScalarProperty Name="IdMembru" ColumnName="IdMembru" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="parola" ColumnName="parola" />
+          <ScalarProperty Name="Nume" ColumnName="Nume" />
+          <ScalarProperty Name="Prenume" ColumnName="Prenume" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DataNasterii" ColumnName="DataNasterii" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="DataInregistrare" ColumnName="DataInregistrare" />
+          <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Produs">
+      <EntityTypeMapping TypeName="DBcasademodaModel.Produ">
+        <MappingFragment StoreEntitySet="Produs">
+          <ScalarProperty Name="IdProdus" ColumnName="IdProdus" />
+          <ScalarProperty Name="NumeProdus" ColumnName="NumeProdus" />
+          <ScalarProperty Name="Imagine" ColumnName="Imagine" />
+          <ScalarProperty Name="Pret" ColumnName="Pret" />
+          <ScalarProperty Name="Descriere" ColumnName="Descriere" />
+          <ScalarProperty Name="Cantitate" ColumnName="Cantitate" />
+          <ScalarProperty Name="DataCreare" ColumnName="DataCreare" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IdCategorie" ColumnName="IdCategorie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Programaris">
+      <EntityTypeMapping TypeName="DBcasademodaModel.Programari">
+        <MappingFragment StoreEntitySet="Programari">
+          <ScalarProperty Name="IdProgramare" ColumnName="IdProgramare" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="Ora" ColumnName="Ora" />
+          <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+          <ScalarProperty Name="IdMembru" ColumnName="IdMembru" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rols">
+      <EntityTypeMapping TypeName="DBcasademodaModel.Rol">
+        <MappingFragment StoreEntitySet="Rol">
+          <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+          <ScalarProperty Name="NumeRol" ColumnName="NumeRol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="DBcasademodaModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contacts">
+      <EntityTypeMapping TypeName="DBcasademodaModel.Contact">
+        <MappingFragment StoreEntitySet="Contact">
+          <ScalarProperty Name="Mesaj" ColumnName="Mesaj" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Nume" ColumnName="Nume" />
+          <ScalarProperty Name="DataContact" ColumnName="DataContact" />
+          <ScalarProperty Name="IdContact" ColumnName="IdContact" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

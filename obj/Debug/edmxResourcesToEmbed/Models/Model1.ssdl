@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBcasademodaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Articol">
+    <Key>
+      <PropertyRef Name="IdArticol" />
+    </Key>
+    <Property Name="IdArticol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Titlu" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Descriere" Type="nvarchar" MaxLength="2000" />
+    <Property Name="Imagine" Type="nvarchar" MaxLength="2000" />
+    <Property Name="DataPublicare" Type="datetime" />
+    <Property Name="Continut" Type="nvarchar(max)" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="IdCategorie" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Categorie">
+    <Key>
+      <PropertyRef Name="IdCategorie" />
+    </Key>
+    <Property Name="IdCategorie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NumeCategorie" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="IdClient" />
+    </Key>
+    <Property Name="IdClient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nume" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Prenume" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Telefon" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Adresa" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Contact">
+    <Key>
+      <PropertyRef Name="IdContact" />
+    </Key>
+    <Property Name="IdContact" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DataContact" Type="datetime" />
+    <Property Name="Nume" Type="nvarchar" MaxLength="250" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Mesaj" Type="nvarchar" MaxLength="2000" />
+  </EntityType>
+  <EntityType Name="Culoare">
+    <Key>
+      <PropertyRef Name="IdCuloare" />
+    </Key>
+    <Property Name="IdCuloare" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DenumireCuloare" Type="nvarchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DetaliiFactura">
+    <Key>
+      <PropertyRef Name="IdDF" />
+    </Key>
+    <Property Name="IdDF" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdFactura" Type="int" />
+    <Property Name="IdProdus" Type="int" />
+    <Property Name="CantitateProdus" Type="int" />
+    <Property Name="PretUnit" Type="real" />
+    <Property Name="PretTotal" Type="int" />
+    <Property Name="IdCuloare" Type="int" />
+    <Property Name="IdMarime" Type="int" />
+  </EntityType>
+  <EntityType Name="Factura">
+    <Key>
+      <PropertyRef Name="IdFactura" />
+    </Key>
+    <Property Name="IdFactura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NrFactura" Type="varchar" MaxLength="255" />
+    <Property Name="DataComanda" Type="datetime" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="StatusLivrare" Type="bit" />
+    <Property Name="DataLivrare" Type="datetime" />
+    <Property Name="CostTotal" Type="real" Nullable="false" />
+    <Property Name="IdMembru" Type="int" />
+    <Property Name="IdClient" Type="int" />
+  </EntityType>
+  <EntityType Name="Marime">
+    <Key>
+      <PropertyRef Name="IdMarime" />
+    </Key>
+    <Property Name="IdMarime" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DenumireMarime" Type="nvarchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Membru">
+    <Key>
+      <PropertyRef Name="IdMembru" />
+    </Key>
+    <Property Name="IdMembru" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="parola" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Nume" Type="nvarchar" MaxLength="250" />
+    <Property Name="Prenume" Type="nvarchar" MaxLength="250" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="DataNasterii" Type="date" />
+    <Property Name="Telefon" Type="varchar" MaxLength="20" />
+    <Property Name="DataInregistrare" Type="datetime" />
+    <Property Name="Adresa" Type="nvarchar" MaxLength="250" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="IdRol" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Produs">
+    <Key>
+      <PropertyRef Name="IdProdus" />
+    </Key>
+    <Property Name="IdProdus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NumeProdus" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Imagine" Type="nvarchar" MaxLength="2000" />
+    <Property Name="Pret" Type="real" />
+    <Property Name="Descriere" Type="nvarchar" MaxLength="2000" />
+    <Property Name="Cantitate" Type="int" />
+    <Property Name="DataCreare" Type="datetime" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="IdCategorie" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Programari">
+    <Key>
+      <PropertyRef Name="IdProgramare" />
+    </Key>
+    <Property Name="IdProgramare" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Data" Type="date" Nullable="false" />
+    <Property Name="Ora" Type="time" Precision="7" Nullable="false" />
+    <Property Name="IdClient" Type="int" />
+    <Property Name="IdMembru" Type="int" />
+  </EntityType>
+  <EntityType Name="Rol">
+    <Key>
+      <PropertyRef Name="IdRol" />
+    </Key>
+    <Property Name="IdRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NumeRol" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_Articol_Categorie">
+    <End Role="Categorie" Type="Self.Categorie" Multiplicity="1" />
+    <End Role="Articol" Type="Self.Articol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categorie">
+        <PropertyRef Name="IdCategorie" />
+      </Principal>
+      <Dependent Role="Articol">
+        <PropertyRef Name="IdCategorie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetaliiFactura_Culoare">
+    <End Role="Culoare" Type="Self.Culoare" Multiplicity="0..1" />
+    <End Role="DetaliiFactura" Type="Self.DetaliiFactura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Culoare">
+        <PropertyRef Name="IdCuloare" />
+      </Principal>
+      <Dependent Role="DetaliiFactura">
+        <PropertyRef Name="IdCuloare" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetaliiFactura_Factura">
+    <End Role="Factura" Type="Self.Factura" Multiplicity="0..1" />
+    <End Role="DetaliiFactura" Type="Self.DetaliiFactura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Factura">
+        <PropertyRef Name="IdFactura" />
+      </Principal>
+      <Dependent Role="DetaliiFactura">
+        <PropertyRef Name="IdFactura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetaliiFactura_Marime">
+    <End Role="Marime" Type="Self.Marime" Multiplicity="0..1" />
+    <End Role="DetaliiFactura" Type="Self.DetaliiFactura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Marime">
+        <PropertyRef Name="IdMarime" />
+      </Principal>
+      <Dependent Role="DetaliiFactura">
+        <PropertyRef Name="IdMarime" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetaliiFactura_Produs">
+    <End Role="Produs" Type="Self.Produs" Multiplicity="0..1" />
+    <End Role="DetaliiFactura" Type="Self.DetaliiFactura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Produs">
+        <PropertyRef Name="IdProdus" />
+      </Principal>
+      <Dependent Role="DetaliiFactura">
+        <PropertyRef Name="IdProdus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Factura_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="IdClient" />
+      </Principal>
+      <Dependent Role="Factura">
+        <PropertyRef Name="IdClient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Factura_Membru">
+    <End Role="Membru" Type="Self.Membru" Multiplicity="0..1" />
+    <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Membru">
+        <PropertyRef Name="IdMembru" />
+      </Principal>
+      <Dependent Role="Factura">
+        <PropertyRef Name="IdMembru" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Membru_Rol">
+    <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+    <End Role="Membru" Type="Self.Membru" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rol">
+        <PropertyRef Name="IdRol" />
+      </Principal>
+      <Dependent Role="Membru">
+        <PropertyRef Name="IdRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Produs_Categorie">
+    <End Role="Categorie" Type="Self.Categorie" Multiplicity="1" />
+    <End Role="Produs" Type="Self.Produs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categorie">
+        <PropertyRef Name="IdCategorie" />
+      </Principal>
+      <Dependent Role="Produs">
+        <PropertyRef Name="IdCategorie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Programari_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="Programari" Type="Self.Programari" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="IdClient" />
+      </Principal>
+      <Dependent Role="Programari">
+        <PropertyRef Name="IdClient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Programari_Membru">
+    <End Role="Membru" Type="Self.Membru" Multiplicity="0..1" />
+    <End Role="Programari" Type="Self.Programari" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Membru">
+        <PropertyRef Name="IdMembru" />
+      </Principal>
+      <Dependent Role="Programari">
+        <PropertyRef Name="IdMembru" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBcasademodaModelStoreContainer">
+    <EntitySet Name="Articol" EntityType="Self.Articol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Categorie" EntityType="Self.Categorie" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Culoare" EntityType="Self.Culoare" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetaliiFactura" EntityType="Self.DetaliiFactura" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Factura" EntityType="Self.Factura" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Marime" EntityType="Self.Marime" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Membru" EntityType="Self.Membru" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Produs" EntityType="Self.Produs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Programari" EntityType="Self.Programari" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Articol_Categorie" Association="Self.FK_Articol_Categorie">
+      <End Role="Categorie" EntitySet="Categorie" />
+      <End Role="Articol" EntitySet="Articol" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetaliiFactura_Culoare" Association="Self.FK_DetaliiFactura_Culoare">
+      <End Role="Culoare" EntitySet="Culoare" />
+      <End Role="DetaliiFactura" EntitySet="DetaliiFactura" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetaliiFactura_Factura" Association="Self.FK_DetaliiFactura_Factura">
+      <End Role="Factura" EntitySet="Factura" />
+      <End Role="DetaliiFactura" EntitySet="DetaliiFactura" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetaliiFactura_Marime" Association="Self.FK_DetaliiFactura_Marime">
+      <End Role="Marime" EntitySet="Marime" />
+      <End Role="DetaliiFactura" EntitySet="DetaliiFactura" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetaliiFactura_Produs" Association="Self.FK_DetaliiFactura_Produs">
+      <End Role="Produs" EntitySet="Produs" />
+      <End Role="DetaliiFactura" EntitySet="DetaliiFactura" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Factura_Client" Association="Self.FK_Factura_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Factura" EntitySet="Factura" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Factura_Membru" Association="Self.FK_Factura_Membru">
+      <End Role="Membru" EntitySet="Membru" />
+      <End Role="Factura" EntitySet="Factura" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Membru_Rol" Association="Self.FK_Membru_Rol">
+      <End Role="Rol" EntitySet="Rol" />
+      <End Role="Membru" EntitySet="Membru" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Produs_Categorie" Association="Self.FK_Produs_Categorie">
+      <End Role="Categorie" EntitySet="Categorie" />
+      <End Role="Produs" EntitySet="Produs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Programari_Client" Association="Self.FK_Programari_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Programari" EntitySet="Programari" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Programari_Membru" Association="Self.FK_Programari_Membru">
+      <End Role="Membru" EntitySet="Membru" />
+      <End Role="Programari" EntitySet="Programari" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
