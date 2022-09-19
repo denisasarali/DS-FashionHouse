@@ -1,0 +1,878 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DBcasademodaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Articol">
+          <Key>
+            <PropertyRef Name="IdArticol" />
+          </Key>
+          <Property Name="IdArticol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titlu" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Descriere" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Imagine" Type="nvarchar" MaxLength="2000" />
+          <Property Name="DataPublicare" Type="datetime" />
+          <Property Name="Continut" Type="nvarchar(max)" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="IdCategorie" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categorie">
+          <Key>
+            <PropertyRef Name="IdCategorie" />
+          </Key>
+          <Property Name="IdCategorie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumeCategorie" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="IdClient" />
+          </Key>
+          <Property Name="IdClient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nume" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Prenume" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefon" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Adresa" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="IdContact" />
+          </Key>
+          <Property Name="IdContact" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DataContact" Type="datetime" />
+          <Property Name="Nume" Type="nvarchar" MaxLength="250" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mesaj" Type="nvarchar" MaxLength="2000" />
+        </EntityType>
+        <EntityType Name="Culoare">
+          <Key>
+            <PropertyRef Name="IdCuloare" />
+          </Key>
+          <Property Name="IdCuloare" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DenumireCuloare" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DetaliiFactura">
+          <Key>
+            <PropertyRef Name="IdDF" />
+          </Key>
+          <Property Name="IdDF" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdFactura" Type="int" />
+          <Property Name="IdProdus" Type="int" />
+          <Property Name="CantitateProdus" Type="int" />
+          <Property Name="PretUnit" Type="real" />
+          <Property Name="PretTotal" Type="int" />
+          <Property Name="IdCuloare" Type="int" />
+          <Property Name="IdMarime" Type="int" />
+        </EntityType>
+        <EntityType Name="Factura">
+          <Key>
+            <PropertyRef Name="IdFactura" />
+          </Key>
+          <Property Name="IdFactura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NrFactura" Type="varchar" MaxLength="255" />
+          <Property Name="DataComanda" Type="datetime" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="StatusLivrare" Type="bit" />
+          <Property Name="DataLivrare" Type="datetime" />
+          <Property Name="CostTotal" Type="real" Nullable="false" />
+          <Property Name="IdMembru" Type="int" />
+          <Property Name="IdClient" Type="int" />
+        </EntityType>
+        <EntityType Name="Marime">
+          <Key>
+            <PropertyRef Name="IdMarime" />
+          </Key>
+          <Property Name="IdMarime" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DenumireMarime" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Membru">
+          <Key>
+            <PropertyRef Name="IdMembru" />
+          </Key>
+          <Property Name="IdMembru" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="parola" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nume" Type="nvarchar" MaxLength="250" />
+          <Property Name="Prenume" Type="nvarchar" MaxLength="250" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="DataNasterii" Type="date" />
+          <Property Name="Telefon" Type="varchar" MaxLength="20" />
+          <Property Name="DataInregistrare" Type="datetime" />
+          <Property Name="Adresa" Type="nvarchar" MaxLength="250" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="IdRol" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Produs">
+          <Key>
+            <PropertyRef Name="IdProdus" />
+          </Key>
+          <Property Name="IdProdus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumeProdus" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Imagine" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Pret" Type="real" />
+          <Property Name="Descriere" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Cantitate" Type="int" />
+          <Property Name="DataCreare" Type="datetime" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="IdCategorie" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Programari">
+          <Key>
+            <PropertyRef Name="IdProgramare" />
+          </Key>
+          <Property Name="IdProgramare" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Data" Type="date" Nullable="false" />
+          <Property Name="Ora" Type="time" Precision="7" Nullable="false" />
+          <Property Name="IdClient" Type="int" />
+          <Property Name="IdMembru" Type="int" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="IdRol" />
+          </Key>
+          <Property Name="IdRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumeRol" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Articol_Categorie">
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="1" />
+          <End Role="Articol" Type="Self.Articol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="IdCategorie" />
+            </Principal>
+            <Dependent Role="Articol">
+              <PropertyRef Name="IdCategorie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetaliiFactura_Culoare">
+          <End Role="Culoare" Type="Self.Culoare" Multiplicity="0..1" />
+          <End Role="DetaliiFactura" Type="Self.DetaliiFactura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Culoare">
+              <PropertyRef Name="IdCuloare" />
+            </Principal>
+            <Dependent Role="DetaliiFactura">
+              <PropertyRef Name="IdCuloare" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetaliiFactura_Factura">
+          <End Role="Factura" Type="Self.Factura" Multiplicity="0..1" />
+          <End Role="DetaliiFactura" Type="Self.DetaliiFactura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Factura">
+              <PropertyRef Name="IdFactura" />
+            </Principal>
+            <Dependent Role="DetaliiFactura">
+              <PropertyRef Name="IdFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetaliiFactura_Marime">
+          <End Role="Marime" Type="Self.Marime" Multiplicity="0..1" />
+          <End Role="DetaliiFactura" Type="Self.DetaliiFactura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marime">
+              <PropertyRef Name="IdMarime" />
+            </Principal>
+            <Dependent Role="DetaliiFactura">
+              <PropertyRef Name="IdMarime" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetaliiFactura_Produs">
+          <End Role="Produs" Type="Self.Produs" Multiplicity="0..1" />
+          <End Role="DetaliiFactura" Type="Self.DetaliiFactura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produs">
+              <PropertyRef Name="IdProdus" />
+            </Principal>
+            <Dependent Role="DetaliiFactura">
+              <PropertyRef Name="IdProdus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_Membru">
+          <End Role="Membru" Type="Self.Membru" Multiplicity="0..1" />
+          <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Membru">
+              <PropertyRef Name="IdMembru" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="IdMembru" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Membru_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Membru" Type="Self.Membru" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="IdRol" />
+            </Principal>
+            <Dependent Role="Membru">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produs_Categorie">
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="1" />
+          <End Role="Produs" Type="Self.Produs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="IdCategorie" />
+            </Principal>
+            <Dependent Role="Produs">
+              <PropertyRef Name="IdCategorie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Programari_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Programari" Type="Self.Programari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Programari">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Programari_Membru">
+          <End Role="Membru" Type="Self.Membru" Multiplicity="0..1" />
+          <End Role="Programari" Type="Self.Programari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Membru">
+              <PropertyRef Name="IdMembru" />
+            </Principal>
+            <Dependent Role="Programari">
+              <PropertyRef Name="IdMembru" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBcasademodaModelStoreContainer">
+          <EntitySet Name="Articol" EntityType="Self.Articol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categorie" EntityType="Self.Categorie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Culoare" EntityType="Self.Culoare" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetaliiFactura" EntityType="Self.DetaliiFactura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Factura" EntityType="Self.Factura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marime" EntityType="Self.Marime" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Membru" EntityType="Self.Membru" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produs" EntityType="Self.Produs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Programari" EntityType="Self.Programari" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Articol_Categorie" Association="Self.FK_Articol_Categorie">
+            <End Role="Categorie" EntitySet="Categorie" />
+            <End Role="Articol" EntitySet="Articol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetaliiFactura_Culoare" Association="Self.FK_DetaliiFactura_Culoare">
+            <End Role="Culoare" EntitySet="Culoare" />
+            <End Role="DetaliiFactura" EntitySet="DetaliiFactura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetaliiFactura_Factura" Association="Self.FK_DetaliiFactura_Factura">
+            <End Role="Factura" EntitySet="Factura" />
+            <End Role="DetaliiFactura" EntitySet="DetaliiFactura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetaliiFactura_Marime" Association="Self.FK_DetaliiFactura_Marime">
+            <End Role="Marime" EntitySet="Marime" />
+            <End Role="DetaliiFactura" EntitySet="DetaliiFactura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetaliiFactura_Produs" Association="Self.FK_DetaliiFactura_Produs">
+            <End Role="Produs" EntitySet="Produs" />
+            <End Role="DetaliiFactura" EntitySet="DetaliiFactura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_Client" Association="Self.FK_Factura_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Factura" EntitySet="Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_Membru" Association="Self.FK_Factura_Membru">
+            <End Role="Membru" EntitySet="Membru" />
+            <End Role="Factura" EntitySet="Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Membru_Rol" Association="Self.FK_Membru_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Membru" EntitySet="Membru" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produs_Categorie" Association="Self.FK_Produs_Categorie">
+            <End Role="Categorie" EntitySet="Categorie" />
+            <End Role="Produs" EntitySet="Produs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Programari_Client" Association="Self.FK_Programari_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Programari" EntitySet="Programari" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Programari_Membru" Association="Self.FK_Programari_Membru">
+            <End Role="Membru" EntitySet="Membru" />
+            <End Role="Programari" EntitySet="Programari" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBcasademodaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Articol">
+          <Key>
+            <PropertyRef Name="IdArticol" />
+          </Key>
+          <Property Name="IdArticol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titlu" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descriere" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Imagine" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="DataPublicare" Type="DateTime" Precision="3" />
+          <Property Name="Continut" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="IdCategorie" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Categorie" Relationship="Self.FK_Articol_Categorie" FromRole="Articol" ToRole="Categorie" />
+        </EntityType>
+        <EntityType Name="Categorie">
+          <Key>
+            <PropertyRef Name="IdCategorie" />
+          </Key>
+          <Property Name="IdCategorie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeCategorie" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Articols" Relationship="Self.FK_Articol_Categorie" FromRole="Categorie" ToRole="Articol" />
+          <NavigationProperty Name="Produs" Relationship="Self.FK_Produs_Categorie" FromRole="Categorie" ToRole="Produs" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="IdClient" />
+          </Key>
+          <Property Name="IdClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nume" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prenume" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefon" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adresa" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK_Factura_Client" FromRole="Client" ToRole="Factura" />
+          <NavigationProperty Name="Programaris" Relationship="Self.FK_Programari_Client" FromRole="Client" ToRole="Programari" />
+        </EntityType>
+        <EntityType Name="Culoare">
+          <Key>
+            <PropertyRef Name="IdCuloare" />
+          </Key>
+          <Property Name="IdCuloare" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DenumireCuloare" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DetaliiFacturas" Relationship="Self.FK_DetaliiFactura_Culoare" FromRole="Culoare" ToRole="DetaliiFactura" />
+        </EntityType>
+        <EntityType Name="DetaliiFactura">
+          <Key>
+            <PropertyRef Name="IdDF" />
+          </Key>
+          <Property Name="IdDF" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFactura" Type="Int32" />
+          <Property Name="IdProdus" Type="Int32" />
+          <Property Name="CantitateProdus" Type="Int32" />
+          <Property Name="PretUnit" Type="Single" />
+          <Property Name="PretTotal" Type="Int32" />
+          <Property Name="IdCuloare" Type="Int32" />
+          <Property Name="IdMarime" Type="Int32" />
+          <NavigationProperty Name="Culoare" Relationship="Self.FK_DetaliiFactura_Culoare" FromRole="DetaliiFactura" ToRole="Culoare" />
+          <NavigationProperty Name="Factura" Relationship="Self.FK_DetaliiFactura_Factura" FromRole="DetaliiFactura" ToRole="Factura" />
+          <NavigationProperty Name="Marime" Relationship="Self.FK_DetaliiFactura_Marime" FromRole="DetaliiFactura" ToRole="Marime" />
+          <NavigationProperty Name="Produ" Relationship="Self.FK_DetaliiFactura_Produs" FromRole="DetaliiFactura" ToRole="Produs" />
+        </EntityType>
+        <EntityType Name="Factura">
+          <Key>
+            <PropertyRef Name="IdFactura" />
+          </Key>
+          <Property Name="IdFactura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NrFactura" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DataComanda" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="StatusLivrare" Type="Boolean" />
+          <Property Name="DataLivrare" Type="DateTime" Precision="3" />
+          <Property Name="CostTotal" Type="Single" Nullable="false" />
+          <Property Name="IdMembru" Type="Int32" />
+          <Property Name="IdClient" Type="Int32" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Factura_Client" FromRole="Factura" ToRole="Client" />
+          <NavigationProperty Name="DetaliiFacturas" Relationship="Self.FK_DetaliiFactura_Factura" FromRole="Factura" ToRole="DetaliiFactura" />
+          <NavigationProperty Name="Membru" Relationship="Self.FK_Factura_Membru" FromRole="Factura" ToRole="Membru" />
+        </EntityType>
+        <EntityType Name="Marime">
+          <Key>
+            <PropertyRef Name="IdMarime" />
+          </Key>
+          <Property Name="IdMarime" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DenumireMarime" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DetaliiFacturas" Relationship="Self.FK_DetaliiFactura_Marime" FromRole="Marime" ToRole="DetaliiFactura" />
+        </EntityType>
+        <EntityType Name="Membru">
+          <Key>
+            <PropertyRef Name="IdMembru" />
+          </Key>
+          <Property Name="IdMembru" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="parola" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nume" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Prenume" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DataNasterii" Type="DateTime" Precision="0" />
+          <Property Name="Telefon" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DataInregistrare" Type="DateTime" Precision="3" />
+          <Property Name="Adresa" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="IdRol" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK_Factura_Membru" FromRole="Membru" ToRole="Factura" />
+          <NavigationProperty Name="Rol" Relationship="Self.FK_Membru_Rol" FromRole="Membru" ToRole="Rol" />
+          <NavigationProperty Name="Programaris" Relationship="Self.FK_Programari_Membru" FromRole="Membru" ToRole="Programari" />
+        </EntityType>
+        <EntityType Name="Produ">
+          <Key>
+            <PropertyRef Name="IdProdus" />
+          </Key>
+          <Property Name="IdProdus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeProdus" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Imagine" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Pret" Type="Single" />
+          <Property Name="Descriere" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Cantitate" Type="Int32" />
+          <Property Name="DataCreare" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="IdCategorie" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Categorie" Relationship="Self.FK_Produs_Categorie" FromRole="Produs" ToRole="Categorie" />
+          <NavigationProperty Name="DetaliiFacturas" Relationship="Self.FK_DetaliiFactura_Produs" FromRole="Produs" ToRole="DetaliiFactura" />
+        </EntityType>
+        <EntityType Name="Programari">
+          <Key>
+            <PropertyRef Name="IdProgramare" />
+          </Key>
+          <Property Name="IdProgramare" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Ora" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="IdClient" Type="Int32" />
+          <Property Name="IdMembru" Type="Int32" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Programari_Client" FromRole="Programari" ToRole="Client" />
+          <NavigationProperty Name="Membru" Relationship="Self.FK_Programari_Membru" FromRole="Programari" ToRole="Membru" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="IdRol" />
+          </Key>
+          <Property Name="IdRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeRol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Membrus" Relationship="Self.FK_Membru_Rol" FromRole="Rol" ToRole="Membru" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Articol_Categorie">
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="1" />
+          <End Role="Articol" Type="Self.Articol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="IdCategorie" />
+            </Principal>
+            <Dependent Role="Articol">
+              <PropertyRef Name="IdCategorie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produs_Categorie">
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="1" />
+          <End Role="Produs" Type="Self.Produ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="IdCategorie" />
+            </Principal>
+            <Dependent Role="Produs">
+              <PropertyRef Name="IdCategorie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Programari_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Programari" Type="Self.Programari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Programari">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetaliiFactura_Culoare">
+          <End Role="Culoare" Type="Self.Culoare" Multiplicity="0..1" />
+          <End Role="DetaliiFactura" Type="Self.DetaliiFactura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Culoare">
+              <PropertyRef Name="IdCuloare" />
+            </Principal>
+            <Dependent Role="DetaliiFactura">
+              <PropertyRef Name="IdCuloare" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetaliiFactura_Factura">
+          <End Role="Factura" Type="Self.Factura" Multiplicity="0..1" />
+          <End Role="DetaliiFactura" Type="Self.DetaliiFactura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Factura">
+              <PropertyRef Name="IdFactura" />
+            </Principal>
+            <Dependent Role="DetaliiFactura">
+              <PropertyRef Name="IdFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetaliiFactura_Marime">
+          <End Role="Marime" Type="Self.Marime" Multiplicity="0..1" />
+          <End Role="DetaliiFactura" Type="Self.DetaliiFactura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marime">
+              <PropertyRef Name="IdMarime" />
+            </Principal>
+            <Dependent Role="DetaliiFactura">
+              <PropertyRef Name="IdMarime" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetaliiFactura_Produs">
+          <End Role="Produs" Type="Self.Produ" Multiplicity="0..1" />
+          <End Role="DetaliiFactura" Type="Self.DetaliiFactura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produs">
+              <PropertyRef Name="IdProdus" />
+            </Principal>
+            <Dependent Role="DetaliiFactura">
+              <PropertyRef Name="IdProdus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_Membru">
+          <End Role="Membru" Type="Self.Membru" Multiplicity="0..1" />
+          <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Membru">
+              <PropertyRef Name="IdMembru" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="IdMembru" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Membru_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Membru" Type="Self.Membru" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="IdRol" />
+            </Principal>
+            <Dependent Role="Membru">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Programari_Membru">
+          <End Role="Membru" Type="Self.Membru" Multiplicity="0..1" />
+          <End Role="Programari" Type="Self.Programari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Membru">
+              <PropertyRef Name="IdMembru" />
+            </Principal>
+            <Dependent Role="Programari">
+              <PropertyRef Name="IdMembru" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBcasademodaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Articols" EntityType="Self.Articol" />
+          <EntitySet Name="Categories" EntityType="Self.Categorie" />
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="Culoares" EntityType="Self.Culoare" />
+          <EntitySet Name="DetaliiFacturas" EntityType="Self.DetaliiFactura" />
+          <EntitySet Name="Facturas" EntityType="Self.Factura" />
+          <EntitySet Name="Marimes" EntityType="Self.Marime" />
+          <EntitySet Name="Membrus" EntityType="Self.Membru" />
+          <EntitySet Name="Produs" EntityType="Self.Produ" />
+          <EntitySet Name="Programaris" EntityType="Self.Programari" />
+          <EntitySet Name="Rols" EntityType="Self.Rol" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK_Articol_Categorie" Association="Self.FK_Articol_Categorie">
+            <End Role="Categorie" EntitySet="Categories" />
+            <End Role="Articol" EntitySet="Articols" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produs_Categorie" Association="Self.FK_Produs_Categorie">
+            <End Role="Categorie" EntitySet="Categories" />
+            <End Role="Produs" EntitySet="Produs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_Client" Association="Self.FK_Factura_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Factura" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Programari_Client" Association="Self.FK_Programari_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Programari" EntitySet="Programaris" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetaliiFactura_Culoare" Association="Self.FK_DetaliiFactura_Culoare">
+            <End Role="Culoare" EntitySet="Culoares" />
+            <End Role="DetaliiFactura" EntitySet="DetaliiFacturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetaliiFactura_Factura" Association="Self.FK_DetaliiFactura_Factura">
+            <End Role="Factura" EntitySet="Facturas" />
+            <End Role="DetaliiFactura" EntitySet="DetaliiFacturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetaliiFactura_Marime" Association="Self.FK_DetaliiFactura_Marime">
+            <End Role="Marime" EntitySet="Marimes" />
+            <End Role="DetaliiFactura" EntitySet="DetaliiFacturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetaliiFactura_Produs" Association="Self.FK_DetaliiFactura_Produs">
+            <End Role="Produs" EntitySet="Produs" />
+            <End Role="DetaliiFactura" EntitySet="DetaliiFacturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_Membru" Association="Self.FK_Factura_Membru">
+            <End Role="Membru" EntitySet="Membrus" />
+            <End Role="Factura" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Membru_Rol" Association="Self.FK_Membru_Rol">
+            <End Role="Rol" EntitySet="Rols" />
+            <End Role="Membru" EntitySet="Membrus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Programari_Membru" Association="Self.FK_Programari_Membru">
+            <End Role="Membru" EntitySet="Membrus" />
+            <End Role="Programari" EntitySet="Programaris" />
+          </AssociationSet>
+          <EntitySet Name="Contacts" EntityType="DBcasademodaModel.Contact" />
+        </EntityContainer>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="IdContact" />
+          </Key>
+          <Property Name="IdContact" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DataContact" Type="DateTime" Precision="3" />
+          <Property Name="Nume" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mesaj" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBcasademodaModelStoreContainer" CdmEntityContainer="DBcasademodaEntities">
+          <EntitySetMapping Name="Articols">
+            <EntityTypeMapping TypeName="DBcasademodaModel.Articol">
+              <MappingFragment StoreEntitySet="Articol">
+                <ScalarProperty Name="IdArticol" ColumnName="IdArticol" />
+                <ScalarProperty Name="Titlu" ColumnName="Titlu" />
+                <ScalarProperty Name="Descriere" ColumnName="Descriere" />
+                <ScalarProperty Name="Imagine" ColumnName="Imagine" />
+                <ScalarProperty Name="DataPublicare" ColumnName="DataPublicare" />
+                <ScalarProperty Name="Continut" ColumnName="Continut" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IdCategorie" ColumnName="IdCategorie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="DBcasademodaModel.Categorie">
+              <MappingFragment StoreEntitySet="Categorie">
+                <ScalarProperty Name="IdCategorie" ColumnName="IdCategorie" />
+                <ScalarProperty Name="NumeCategorie" ColumnName="NumeCategorie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="DBcasademodaModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Prenume" ColumnName="Prenume" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Culoares">
+            <EntityTypeMapping TypeName="DBcasademodaModel.Culoare">
+              <MappingFragment StoreEntitySet="Culoare">
+                <ScalarProperty Name="IdCuloare" ColumnName="IdCuloare" />
+                <ScalarProperty Name="DenumireCuloare" ColumnName="DenumireCuloare" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetaliiFacturas">
+            <EntityTypeMapping TypeName="DBcasademodaModel.DetaliiFactura">
+              <MappingFragment StoreEntitySet="DetaliiFactura">
+                <ScalarProperty Name="IdDF" ColumnName="IdDF" />
+                <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
+                <ScalarProperty Name="IdProdus" ColumnName="IdProdus" />
+                <ScalarProperty Name="CantitateProdus" ColumnName="CantitateProdus" />
+                <ScalarProperty Name="PretUnit" ColumnName="PretUnit" />
+                <ScalarProperty Name="PretTotal" ColumnName="PretTotal" />
+                <ScalarProperty Name="IdCuloare" ColumnName="IdCuloare" />
+                <ScalarProperty Name="IdMarime" ColumnName="IdMarime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facturas">
+            <EntityTypeMapping TypeName="DBcasademodaModel.Factura">
+              <MappingFragment StoreEntitySet="Factura">
+                <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
+                <ScalarProperty Name="NrFactura" ColumnName="NrFactura" />
+                <ScalarProperty Name="DataComanda" ColumnName="DataComanda" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="StatusLivrare" ColumnName="StatusLivrare" />
+                <ScalarProperty Name="DataLivrare" ColumnName="DataLivrare" />
+                <ScalarProperty Name="CostTotal" ColumnName="CostTotal" />
+                <ScalarProperty Name="IdMembru" ColumnName="IdMembru" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marimes">
+            <EntityTypeMapping TypeName="DBcasademodaModel.Marime">
+              <MappingFragment StoreEntitySet="Marime">
+                <ScalarProperty Name="IdMarime" ColumnName="IdMarime" />
+                <ScalarProperty Name="DenumireMarime" ColumnName="DenumireMarime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Membrus">
+            <EntityTypeMapping TypeName="DBcasademodaModel.Membru">
+              <MappingFragment StoreEntitySet="Membru">
+                <ScalarProperty Name="IdMembru" ColumnName="IdMembru" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="parola" ColumnName="parola" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Prenume" ColumnName="Prenume" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DataNasterii" ColumnName="DataNasterii" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="DataInregistrare" ColumnName="DataInregistrare" />
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produs">
+            <EntityTypeMapping TypeName="DBcasademodaModel.Produ">
+              <MappingFragment StoreEntitySet="Produs">
+                <ScalarProperty Name="IdProdus" ColumnName="IdProdus" />
+                <ScalarProperty Name="NumeProdus" ColumnName="NumeProdus" />
+                <ScalarProperty Name="Imagine" ColumnName="Imagine" />
+                <ScalarProperty Name="Pret" ColumnName="Pret" />
+                <ScalarProperty Name="Descriere" ColumnName="Descriere" />
+                <ScalarProperty Name="Cantitate" ColumnName="Cantitate" />
+                <ScalarProperty Name="DataCreare" ColumnName="DataCreare" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IdCategorie" ColumnName="IdCategorie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Programaris">
+            <EntityTypeMapping TypeName="DBcasademodaModel.Programari">
+              <MappingFragment StoreEntitySet="Programari">
+                <ScalarProperty Name="IdProgramare" ColumnName="IdProgramare" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Ora" ColumnName="Ora" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="IdMembru" ColumnName="IdMembru" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rols">
+            <EntityTypeMapping TypeName="DBcasademodaModel.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="NumeRol" ColumnName="NumeRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DBcasademodaModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="DBcasademodaModel.Contact">
+              <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="Mesaj" ColumnName="Mesaj" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="DataContact" ColumnName="DataContact" />
+                <ScalarProperty Name="IdContact" ColumnName="IdContact" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

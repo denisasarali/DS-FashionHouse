@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="71e9952116d440d0ab5e7b4df4aee4f1" Name="Diagram1" ZoomLevel="71">
+        <EntityTypeShape EntityType="DBcasademodaModel.Articol" Width="1.5" PointX="0.875" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBcasademodaModel.Categorie" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBcasademodaModel.Client" Width="1.5" PointX="7.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBcasademodaModel.Culoare" Width="1.5" PointX="13.875" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBcasademodaModel.DetaliiFactura" Width="1.5" PointX="10.5" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBcasademodaModel.Factura" Width="1.5" PointX="8.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBcasademodaModel.Marime" Width="1.5" PointX="13.5" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBcasademodaModel.Membru" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBcasademodaModel.Produ" Width="1.5" PointX="8.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBcasademodaModel.Programari" Width="1.5" PointX="5.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBcasademodaModel.Rol" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBcasademodaModel.sysdiagram" Width="1.5" PointX="10.75" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="DBcasademodaModel.FK_Articol_Categorie" ManuallyRouted="false" />
+        <AssociationConnector Association="DBcasademodaModel.FK_Produs_Categorie" ManuallyRouted="false" />
+        <AssociationConnector Association="DBcasademodaModel.FK_Factura_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="DBcasademodaModel.FK_Programari_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="DBcasademodaModel.FK_DetaliiFactura_Culoare" ManuallyRouted="false" />
+        <AssociationConnector Association="DBcasademodaModel.FK_DetaliiFactura_Factura" ManuallyRouted="false" />
+        <AssociationConnector Association="DBcasademodaModel.FK_DetaliiFactura_Marime" ManuallyRouted="false" />
+        <AssociationConnector Association="DBcasademodaModel.FK_DetaliiFactura_Produs" ManuallyRouted="false" />
+        <AssociationConnector Association="DBcasademodaModel.FK_Factura_Membru" ManuallyRouted="false" />
+        <AssociationConnector Association="DBcasademodaModel.FK_Membru_Rol" ManuallyRouted="false" />
+        <AssociationConnector Association="DBcasademodaModel.FK_Programari_Membru" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DBcasademodaModel.Contact" Width="1.5" PointX="0.75" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
